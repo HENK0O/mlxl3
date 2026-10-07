@@ -1,0 +1,28 @@
+{
+  "command": [
+    "/Users/henko/Documents/Codex/2026-10-05/chec/work/post-smallm-target/release/deps/mlxl3_native-7403dac709d8357e",
+    "qwen35::prepared::prepared_attention_paired",
+    "--ignored",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "binary_sha256": "6280fccb9121953b26eaacac842915f8f0d97aec78cb0e01ac6eab353fec2ad0",
+  "env": {
+    "MLXL3_MLX_ROOT": "/Users/henko/.cache/uv/archive-v0/oJmJtSVZn8RVlMAW/mlx",
+    "MLXL3_MTP_TEST_MODEL": "/Users/henko/Library/Application Support/io.mlxl3.desktop/Models/Qwen3.8-27B-exl3-6a9ca9d0",
+    "MLXL3_A1_REPORT": "/Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm/docs/measurements/qwen27-post-smallm/a1-attention-paired.json"
+  },
+  "before": {
+    "power": "Now drawing from 'Battery Power'\n -InternalBattery-0 (id=36110435)\t69%; discharging; 3:52 remaining present: true\n",
+    "swap": "vm.swapusage: total = 5120.00M  used = 3417.56M  free = 1702.44M  (encrypted)\n",
+    "therm": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded\n"
+  },
+  "exit_code": 0,
+  "seconds": 2.956924749999999,
+  "after": {
+    "power": "Now drawing from 'Battery Power'\n -InternalBattery-0 (id=36110435)\t69%; discharging; 3:52 remaining present: true\n",
+    "swap": "vm.swapusage: total = 5120.00M  used = 3409.56M  free = 1710.44M  (encrypted)\n",
+    "therm": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded\n"
+  }
+}

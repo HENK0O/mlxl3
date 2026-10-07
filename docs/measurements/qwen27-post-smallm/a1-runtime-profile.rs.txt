@@ -1,0 +1,523 @@
+//! Test-only attribution on the real verifier. Fences change scheduling;
+//! fenced wall times are diagnostic, never additive GPU-only timings.
+use super::*;
+use crate::array::synchronize;
+use std::{cell::RefCell, time::Instant};
+
+#[derive(Clone, Copy)]
+enum Mode {
+    Capture,
+    Graph,
+    Fenced,
+}
+
+struct Active {
+    mode: Mode,
+    layer: Option<usize>,
+    records: Vec<serde_json::Value>,
+    logits: Option<Array>,
+}
+
+thread_local! {
+    static ACTIVE: RefCell<Option<Active>> = const { RefCell::new(None) };
+}
+
+struct Scope;
+
+impl Scope {
+    fn begin(mode: Mode) -> Result<Self> {
+        ACTIVE.with_borrow_mut(|active| {
+            ensure!(active.is_none(), "nested profile scope");
+            *active = Some(Active {
+                mode,
+                layer: None,
+                records: Vec::new(),
+                logits: None,
+            });
+            Ok(Self)
+        })
+    }
+
+    fn logits(&self) -> Result<Array> {
+        ACTIVE.with_borrow(|active| {
+            active
+                .as_ref()
+                .unwrap()
+                .logits
+                .as_ref()
+                .context("missing captured target logits")?
+                .try_clone()
+        })
+    }
+
+    fn records(&self) -> Vec<serde_json::Value> {
+        ACTIVE.with_borrow(|active| active.as_ref().unwrap().records.clone())
+    }
+}
+
+impl Drop for Scope {
+    fn drop(&mut self) {
+        ACTIVE.with_borrow_mut(|active| *active = None);
+    }
+}
+
+pub(super) fn set_layer(layer: Option<usize>) {
+    ACTIVE.with_borrow_mut(|active| {
+        if let Some(active) = active {
+            active.layer = layer;
+        }
+    });
+}
+
+pub(super) fn capture_logits(logits: &Array) -> Result<()> {
+    ACTIVE.with_borrow_mut(|active| {
+        if let Some(active) = active {
+            active.logits = Some(logits.try_clone()?);
+        }
+        Ok(())
+    })
+}
+
+pub(crate) struct Stage(Option<(Instant, Mode, Option<usize>, &'static str)>);
+
+impl Stage {
+    pub(crate) fn start(name: &'static str) -> Self {
+        Self(ACTIVE.with_borrow(|active| {
+            active
+                .as_ref()
+                .filter(|active| !matches!(active.mode, Mode::Capture))
+                .map(|active| (Instant::now(), active.mode, active.layer, name))
+        }))
+    }
+
+    pub(crate) fn finish(self, arrays: &[&Array]) -> Result<()> {
+        let Some((start, mode, layer, name)) = self.0 else {
+            return Ok(());
+        };
+        if matches!(mode, Mode::Fenced) {
+            for array in arrays {
+                array.eval()?;
+            }
+            synchronize()?;
+        }
+        let seconds = start.elapsed().as_secs_f64();
+        ACTIVE.with_borrow_mut(|active| {
+            if let Some(active) = active {
+                active.records.push(serde_json::json!({
+                    "stage": name, "layer": layer, "seconds": seconds
+                }));
+            }
+        });
+        Ok(())
+    }
+}
+
+pub(super) fn arrays(snapshot: &QwenSnapshot) -> Vec<&Array> {
+    snapshot
+        .layers
+        .iter()
+        .flat_map(|layer| match layer {
+            LayerSnapshot::Linear { conv, recurrent } => [conv.as_ref(), recurrent.as_ref()],
+            LayerSnapshot::Attention { keys, values } => [keys.as_ref(), values.as_ref()],
+        })
+        .flatten()
+        .chain(snapshot.last_hidden.as_ref())
+        .collect()
+}
+
+fn finite_storage(dtype: Dtype, bytes: &[u8]) -> bool {
+    if bytes.is_empty() || !bytes.len().is_multiple_of(dtype.item_size()) {
+        return false;
+    }
+    match dtype {
+        Dtype::Float16 => bytes
+            .as_chunks::<2>()
+            .0
+            .iter()
+            .all(|x| f16::from_bits(u16::from_ne_bytes(*x)).is_finite()),
+        Dtype::BFloat16 => bytes
+            .as_chunks::<2>()
+            .0
+            .iter()
+            .all(|x| half::bf16::from_bits(u16::from_ne_bytes(*x)).is_finite()),
+        Dtype::Float32 => bytes
+            .as_chunks::<4>()
+            .0
+            .iter()
+            .all(|x| f32::from_ne_bytes(*x).is_finite()),
+        _ => false,
+    }
+}
+
+struct RoundReference {
+    tokens: Vec<u32>,
+    state: StateReference,
+    draft: (Vec<u8>, Vec<u8>),
+    counters: (usize, usize, usize),
+    logits: Vec<u16>,
+}
+
+pub(super) struct StateReference {
+    offset: i32,
+    directory: tempfile::TempDir,
+    entries: Vec<(Vec<i32>, Dtype, usize)>,
+}
+
+impl StateReference {
+    pub(super) fn save(state: &QwenSnapshot) -> Result<Self> {
+        let mut reference = Self {
+            offset: state.offset,
+            directory: tempfile::tempdir()?,
+            entries: Vec::new(),
+        };
+        let values = arrays(state);
+        ensure!(values.len() == 129, "invalid profile state count");
+        for (index, value) in values.iter().enumerate() {
+            let bytes = value.to_bytes()?;
+            ensure!(
+                bytes.len() == value.byte_len()? && finite_storage(value.dtype(), &bytes),
+                "invalid reference state {index}"
+            );
+            std::fs::write(reference.directory.path().join(index.to_string()), &bytes)?;
+            reference
+                .entries
+                .push((value.shape().to_vec(), value.dtype(), bytes.len()));
+        }
+        Ok(reference)
+    }
+
+    pub(super) fn compare(&self, state: &QwenSnapshot) -> Result<()> {
+        ensure!(state.offset == self.offset, "profile offset differs");
+        let values = arrays(state);
+        ensure!(
+            values.len() == self.entries.len() && values.len() == 129,
+            "profile state count differs"
+        );
+        for (index, (value, (shape, dtype, size))) in values.iter().zip(&self.entries).enumerate() {
+            ensure!(
+                value.shape() == *shape && value.dtype() == *dtype,
+                "profile state shape {index}"
+            );
+            let bytes = value.to_bytes()?;
+            ensure!(
+                bytes.len() == *size && finite_storage(*dtype, &bytes),
+                "invalid profile state {index}"
+            );
+            ensure!(
+                bytes == std::fs::read(self.directory.path().join(index.to_string()))?,
+                "profile state differs at array {index}"
+            );
+        }
+        Ok(())
+    }
+}
+
+#[test]
+fn finite_state_storage_checks_original_dtype() {
+    assert!(finite_storage(Dtype::Float32, &f32::MAX.to_ne_bytes()));
+    assert!(finite_storage(Dtype::Float32, &0_f32.to_ne_bytes()));
+    for value in [f32::NAN, f32::INFINITY, f32::NEG_INFINITY] {
+        assert!(!finite_storage(Dtype::Float32, &value.to_ne_bytes()));
+    }
+    for dtype in [Dtype::Float16, Dtype::BFloat16] {
+        assert!(finite_storage(dtype, &0_u16.to_ne_bytes()));
+        assert!(!finite_storage(dtype, &[0]));
+        assert!(!finite_storage(dtype, &[]));
+    }
+    assert!(!finite_storage(Dtype::Float16, &0x7c00_u16.to_ne_bytes()));
+    assert!(!finite_storage(Dtype::BFloat16, &0x7f80_u16.to_ne_bytes()));
+    assert!(!finite_storage(Dtype::UInt16, &0_u16.to_ne_bytes()));
+}
+
+#[test]
+fn scopes_restore_after_error_and_panic() -> Result<()> {
+    ensure!(
+        ACTIVE.with_borrow(Option::is_none),
+        "profile leaked before test"
+    );
+    {
+        let scope = Scope::begin(Mode::Graph)?;
+        assert!(Scope::begin(Mode::Graph).is_err());
+        Stage::start("control").finish(&[])?;
+        assert_eq!(scope.records().len(), 1);
+    }
+    let panic = std::panic::catch_unwind(|| {
+        let _scope = Scope::begin(Mode::Graph).unwrap();
+        panic!("profile test panic");
+    });
+    assert!(panic.is_err());
+    ensure!(
+        ACTIVE.with_borrow(Option::is_none),
+        "profile leaked after panic"
+    );
+    let scope = Scope::begin(Mode::Graph)?;
+    assert!(
+        std::thread::spawn(|| ACTIVE.with_borrow(Option::is_none))
+            .join()
+            .unwrap()
+    );
+    assert!(scope.records().is_empty());
+    Ok(())
+}
+
+#[cfg(kani)]
+#[kani::proof]
+fn scope_rejects_nesting_and_restores_state() {
+    assert!(ACTIVE.with_borrow(Option::is_none));
+    let mode = if kani::any::<bool>() {
+        Mode::Graph
+    } else {
+        Mode::Fenced
+    };
+    let scope = Scope::begin(mode).unwrap();
+    assert!(Scope::begin(mode).is_err());
+    drop(scope);
+    assert!(ACTIVE.with_borrow(Option::is_none));
+    kani::cover!(Scope::begin(mode).is_ok());
+}
+
+#[test]
+#[ignore = "requires local dense Qwen/MTP and physical Apple GPU; serial campaign"]
+fn real_mtp_round_breakdown() -> Result<()> {
+    use crate::mtp::{Head, Session};
+    let output = std::path::PathBuf::from(std::env::var("MLXL3_PROFILE_OUTPUT")?);
+    let mut file = std::fs::OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .open(&output)?;
+    let mut cells = Vec::new();
+    let result = (|| {
+        let path = std::env::var("MLXL3_MTP_TEST_MODEL")?;
+        let head_path = std::env::var("MLXL3_MTP_TEST_HEAD")?;
+        let tokenizer = crate::tokenizer::ChatTokenizer::load(Path::new(&path))?;
+        let mut model = Qwen35Moe::load(Path::new(&path))?;
+        ensure!(
+            model.layers.len() == 64 && model.mtp_layout.hidden_size == 5120,
+            "profile requires dense27B"
+        );
+        let mut head = Head::load(Path::new(&head_path), &model)?;
+        crate::array::clear_cache()?;
+        let contexts = std::env::var("MLXL3_PROFILE_CONTEXTS")
+            .unwrap_or_else(|_| "4096,8192,16384,32768".into())
+            .split(',')
+            .map(str::parse::<usize>)
+            .collect::<std::result::Result<Vec<_>, _>>()?;
+        ensure!(
+            !contexts.is_empty()
+                && contexts.windows(2).all(|x| x[0] < x[1])
+                && contexts.iter().all(|&x| (24..=32768).contains(&x)),
+            "invalid profile contexts"
+        );
+        let selected = std::env::var("MLXL3_PROFILE_WORKLOAD").unwrap_or_else(|_| "all".into());
+        ensure!(
+            ["all", "code", "fr"].contains(&selected.as_str()),
+            "invalid profile workload"
+        );
+        for (workload, text) in [
+            (
+                "code",
+                "Implement a bounded queue in Rust. Use Result for errors.\nfn push(&mut self, value: u32) -> Result<()> { if self.len() == self.capacity { return Err(Error::Full); } self.values.push_back(value); Ok(()) }\n",
+            ),
+            (
+                "fr",
+                "Explique en français comment vérifier une mesure de performance. Une comparaison fiable garde le même modèle, les mêmes données et le même matériel. Les résultats doivent être reproductibles et les erreurs conservées.\n",
+            ),
+        ] {
+            if selected != "all" && selected != workload {
+                continue;
+            }
+            let seed = tokenizer.encode(text)?;
+            ensure!(!seed.is_empty(), "empty profile tokens");
+            let prefix = seed
+                .iter()
+                .copied()
+                .cycle()
+                .take(*contexts.last().unwrap())
+                .collect::<Vec<_>>();
+            model.reset();
+            head.reset()?;
+            let mut consumed = 0;
+            for &context in &contexts {
+                let mut anchor = 0;
+                while consumed < context {
+                    let end = (consumed + 128).min(context);
+                    let previous = if consumed > 0 {
+                        Some(model.mtp_hidden()?.try_clone()?)
+                    } else {
+                        None
+                    };
+                    let (logits, raw) = model.forward_mtp(&prefix[consumed..end])?;
+                    let length = (end - consumed) as i32;
+                    if let Some(previous) = previous {
+                        head.extend_cache(
+                            &model,
+                            &Array::concatenate(&[&previous, &raw.slice(1, 0, length - 1)?], 1)?,
+                            &prefix[consumed..end],
+                        )?;
+                    } else {
+                        head.extend_cache(&model, &raw.slice(1, 0, length - 1)?, &prefix[1..end])?;
+                    }
+                    anchor = logits.chat_greedy_ids()?[0];
+                    consumed = end;
+                    // Prefill is outside attribution; release obsolete KV-sized scratch.
+                    crate::array::clear_cache()?;
+                }
+                synchronize()?;
+                crate::array::clear_cache()?;
+                let base = model.snapshot()?;
+                let mut head_base = head.snapshot()?;
+                for depth in 1..=3 {
+                    for _ in 0..3 {
+                        model.restore(base.clone())?;
+                        head.restore(head_base)?;
+                        head_base = head.snapshot()?;
+                        Session::new(depth)?.advance(
+                            &mut model,
+                            &mut head,
+                            anchor,
+                            context + 512,
+                            256,
+                        )?;
+                    }
+                    let mut reference: Option<RoundReference> = None;
+                    let mut samples = Vec::new();
+                    for repeat in 0..3 {
+                        let modes = if repeat % 2 == 0 {
+                            [Mode::Capture, Mode::Graph, Mode::Fenced]
+                        } else {
+                            [Mode::Fenced, Mode::Graph, Mode::Capture]
+                        };
+                        for mode in modes {
+                            model.restore(base.clone())?;
+                            head.restore(head_base)?;
+                            head_base = head.snapshot()?;
+                            synchronize()?;
+                            crate::array::clear_cache()?;
+                            let before = crate::array::memory_stats(true)?;
+                            let mut session = Session::new(depth)?;
+                            let scope = Scope::begin(mode)?;
+                            let start = Instant::now();
+                            let first = session.advance(
+                                &mut model,
+                                &mut head,
+                                anchor,
+                                context + 512,
+                                256,
+                            )?;
+                            synchronize()?;
+                            let seconds = start.elapsed().as_secs_f64();
+                            let memory = crate::array::memory_stats(false)?;
+                            let records = scope.records();
+                            let captured = scope.logits()?;
+                            ensure!(
+                                captured.dtype() == Dtype::Float16,
+                                "unexpected profile logits dtype"
+                            );
+                            let logits = captured.to_f16_bits()?;
+                            ensure!(
+                                logits.len() == (depth + 1) * 248320
+                                    && logits.iter().all(|&v| f16::from_bits(v).is_finite()),
+                                "invalid profile logits"
+                            );
+                            if !matches!(mode, Mode::Capture) {
+                                for (name, expected) in [
+                                    ("qkv_projection", 16),
+                                    ("gdn_block", 48),
+                                    ("mlp", 64),
+                                    ("sdpa", 16 * (depth + 1)),
+                                ] {
+                                    ensure!(
+                                        records.iter().filter(|r| r["stage"] == name).count()
+                                            == expected,
+                                        "missing profile stages {name}"
+                                    );
+                                }
+                            }
+                            drop(scope);
+                            let retained = (model.offset() - context as i32) as usize;
+                            ensure!(
+                                (1..=depth + 1).contains(&retained)
+                                    && session.blocks == 1
+                                    && session.proposed == depth,
+                                "incomplete profile round"
+                            );
+                            let mut delivered = vec![first];
+                            for _ in 1..retained {
+                                delivered.push(session.advance(
+                                    &mut model,
+                                    &mut head,
+                                    *delivered.last().unwrap(),
+                                    context + 512,
+                                    256,
+                                )?);
+                            }
+                            let state = model.snapshot()?;
+                            let draft = head.cache_bytes()?;
+                            let counters = (session.accepted, session.proposed, session.blocks);
+                            if let Some(expected) = &reference {
+                                ensure!(
+                                    delivered == expected.tokens
+                                        && draft == expected.draft
+                                        && counters == expected.counters
+                                        && logits == expected.logits,
+                                    "profile IDs/draft/counters differ"
+                                );
+                                expected.state.compare(&state)?;
+                            } else {
+                                reference = Some(RoundReference {
+                                    tokens: delivered.clone(),
+                                    state: StateReference::save(&state)?,
+                                    draft,
+                                    counters,
+                                    logits,
+                                });
+                            }
+                            samples.push(serde_json::json!({
+                                "repeat":repeat, "mode":match mode { Mode::Capture => "normal", Mode::Graph => "graph", Mode::Fenced => "fenced" },
+                                "round_seconds":seconds, "accepted":session.accepted, "proposed":session.proposed,
+                                "delivered":delivered, "records":records, "state_arrays":129, "bit_exact":true,
+                                "memory_before":{"active":before.mlx_active_bytes,"cache":before.mlx_cache_bytes,"footprint":before.process_footprint_bytes},
+                                "memory_after":{"active":memory.mlx_active_bytes,"cache":memory.mlx_cache_bytes,"peak":memory.mlx_peak_bytes,"footprint":memory.process_footprint_bytes}
+                            }));
+                        }
+                    }
+                    cells.push(serde_json::json!({"workload":workload,"context":context,"depth":depth,"samples":samples}));
+                    write_report(&mut file, "running", &cells, None)?;
+                    println!(
+                        "PROFILE completed {workload} context={context} D{depth}, exact state/IDs/draft/counters"
+                    );
+                }
+                model.restore(base)?;
+                head.restore(head_base)?;
+            }
+        }
+        ensure!(!cells.is_empty(), "zero profile cells");
+        Ok(())
+    })();
+    write_report(
+        &mut file,
+        if result.is_ok() { "complete" } else { "failed" },
+        &cells,
+        result.as_ref().err().map(|e: &anyhow::Error| e.to_string()),
+    )?;
+    result
+}
+
+fn write_report(
+    file: &mut File,
+    status: &str,
+    cells: &[serde_json::Value],
+    error: Option<String>,
+) -> Result<()> {
+    use std::io::{Seek, SeekFrom, Write};
+    let bytes = serde_json::to_vec_pretty(&serde_json::json!({
+        "status":status, "parity":status == "complete", "cells":cells, "error":error,
+        "boundary":"real MTP advance on repeated tokenized workload; all diagnostic stage fences test-only",
+        "limits":["fenced times include host/MLX/synchronization and alter scheduling", "nested totals must not be summed", "graph draft/selection still include mandatory production transfers", "no physical GPU-only counters"]
+    }))?;
+    file.seek(SeekFrom::Start(0))?;
+    file.write_all(&bytes)?;
+    file.set_len(bytes.len() as u64)?;
+    file.sync_all()?;
+    Ok(())
+}

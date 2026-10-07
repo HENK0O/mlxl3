@@ -1,0 +1,9 @@
+   Compiling mlxl3-native v1.4.1 (/Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.56s
+warning: the following packages contain code that will be rejected by a future version of Rust: block v0.1.6
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 1`
+   Compiling mlxl3-native v1.4.1 (/Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm)
+    Finished `release` profile [optimized] target(s) in 20.81s
+warning: the following packages contain code that will be rejected by a future version of Rust: block v0.1.6
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 1`
+  Executable unittests native/src/lib.rs (../work/post-smallm-target/release/deps/mlxl3_native-7403dac709d8357e)

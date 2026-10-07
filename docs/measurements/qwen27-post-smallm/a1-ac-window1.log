@@ -1,0 +1,4 @@
+
+running 1 test
+test qwen35::prepared::prepared_model_verification_paired ... A1 model context=16384 M=2: full logits/129 states/all commits exact, validation_only=false
+A1 model context=16384 M=3: full logits/129 states/all commits exact, validation_only=false

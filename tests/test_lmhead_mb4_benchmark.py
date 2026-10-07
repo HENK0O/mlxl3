@@ -1,0 +1,119 @@
+"""Exercise the reporting entry point without loading GPU weights."""
+
+import copy
+import json
+import subprocess
+import sys
+from pathlib import Path
+from types import SimpleNamespace
+
+import numpy as np
+import pytest
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "benchmarks"))
+import benchmark_lmhead_mb4 as bench
+
+
+def result():
+    def timing(steps):
+        return {
+            "samples_ms": [[2.0, 2.0, 2.0], [1.0, 1.0, 1.0]],
+            "medians_ms": [2.0, 1.0],
+            "paired_gain_pct": 100.0,
+            "steps": steps,
+        }
+
+    return {
+        "validated_projection_steps": 16,
+        "parity": True,
+        "fp32_partials_bit_exact": True,
+        "fp16_forward_and_chain_bit_exact": True,
+        "isolated": timing(1),
+        "dependent": timing(8),
+    }
+
+
+@pytest.mark.parametrize(
+    "inventory",
+    [
+        [],
+        [{"prefixes": ["other"]}],
+        [{"prefixes": ["lm_head"], "input": 5120, "widths": [248320], "k": 2, "cb": 2}],
+    ],
+)
+def test_other_shapes_are_rejected(inventory):
+    with pytest.raises(ValueError):
+        bench.head_shape(SimpleNamespace(inventory=lambda: inventory))
+
+
+@pytest.mark.parametrize("bad", [True, 0, -1, float("nan"), float("inf")])
+def test_invalid_times_cannot_complete(bad):
+    report = result()
+    report["dependent"]["samples_ms"][1][2] = bad
+    with pytest.raises(ValueError):
+        bench.validate_result(report, 3)
+
+
+def test_all_requested_samples_and_true_parity_are_required():
+    good = result()
+    bench.validate_result(good, 3)
+    for key in ["parity", "fp32_partials_bit_exact", "fp16_forward_and_chain_bit_exact"]:
+        bad = copy.deepcopy(good)
+        bad[key] = 1
+        with pytest.raises(ValueError):
+            bench.validate_result(bad, 3)
+    with pytest.raises(ValueError):
+        bench.validate_result(good, 4)
+
+
+@pytest.mark.parametrize("failure", [None, ValueError("different bits"), KeyboardInterrupt()])
+def test_entry_point_records_partial_or_interrupted_failure(tmp_path, monkeypatch, failure):
+    monkeypatch.setattr(bench, "conditions", lambda: {"power": "fixture"})
+
+    def run(*args):
+        if failure is not None:
+            args[2].update(result())
+            raise failure
+
+    monkeypatch.setattr(bench, "screen", run)
+    output = tmp_path / "failed.json"
+    with pytest.raises(type(failure) if failure is not None else ValueError):
+        bench.main(["--model", str(tmp_path), "--output", str(output), "--iterations", "3"])
+    report = json.loads(output.read_text())
+    assert report["status"] == "failed" and report["parity"] is False
+
+
+def test_entry_point_preserves_previous_evidence(tmp_path):
+    output = tmp_path / "existing.json"
+    output.write_text("previous failure")
+    with pytest.raises(FileExistsError):
+        bench.main(["--model", str(tmp_path), "--output", str(output)])
+    assert output.read_text() == "previous failure"
+
+
+@pytest.mark.parametrize("bad", [float("nan"), float("inf"), -float("inf")])
+def test_full_projection_checked_before_feedback_can_mask_infinity(bad):
+    value = np.zeros((4, 248320), dtype=np.float16)
+    value[2, -1] = bad
+    with pytest.raises(ValueError, match="dependent"):
+        bench.check_projection(value)
+
+
+def test_validation_only_still_requires_all_sixteen_projections():
+    good = result()
+    bench.validate_result(good, 3, validation_only=True)
+    good["validated_projection_steps"] = 0
+    with pytest.raises(ValueError, match="projection"):
+        bench.validate_result(good, 3, validation_only=True)
+
+
+@pytest.mark.parametrize(
+    "error", [FileNotFoundError("pmset missing"), subprocess.TimeoutExpired("pmset", 10)]
+)
+def test_conditions_errors_are_explicit_and_cannot_mask_original_failure(monkeypatch, error):
+    def run(*args, **kwargs):
+        raise error
+
+    monkeypatch.setattr(bench.subprocess, "run", run)
+    report = bench.conditions()
+    assert len(report) == 3 and all("unavailable" in value for value in report.values())

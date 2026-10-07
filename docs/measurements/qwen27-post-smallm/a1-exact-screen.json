@@ -1,0 +1,1302 @@
+{
+  "boundary": "real attention weights, deterministic FP16 inputs; not full-model logits or throughput",
+  "cells": [
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 1,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 1,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 1,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 2,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 2,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 2,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 3,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 3,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 3,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 4,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 4,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 4,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 5,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 5,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 5,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 6,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 6,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 6,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 7,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 7,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 7,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 8,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 8,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 8,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 0,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 1,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 1,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 1,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 2,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 2,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 2,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 3,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 3,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 3,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 4,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 4,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 4,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 5,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 5,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 5,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 6,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 6,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 6,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 7,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 7,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 7,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 8,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 8,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 8,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 1,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 1,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 1,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 1,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 2,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 2,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 2,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 3,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 3,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 3,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 4,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 4,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 4,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 5,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 5,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 5,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 6,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 6,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 6,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 7,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 7,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 7,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 8,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 8,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 8,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 23,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 1,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 1,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 1,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 2,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 2,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 2,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 3,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 3,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 3,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 4,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 4,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 4,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 5,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 5,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 5,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 6,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 6,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 6,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 7,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 7,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 7,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 8,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 8,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 8,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 257,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 1,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 1,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 1,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 2,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 2,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 2,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 3,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 3,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 3,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 4,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 4,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 4,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 5,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 5,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 5,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 6,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 6,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 6,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 7,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 7,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 7,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 8,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 8,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 8,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 4096,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 1,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 1,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 1,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 2,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 2,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 2,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 3,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 3,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 3,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 4,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 4,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 4,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 5,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 5,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 5,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 6,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 6,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 6,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 7,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 7,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 7,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 8,
+      "mode": "BatchAll",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 8,
+      "mode": "ScalarRope",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    },
+    {
+      "all_commits_exact": true,
+      "keys_exact": true,
+      "m": 8,
+      "mode": "ScalarNormRope",
+      "output_exact": true,
+      "past": 16384,
+      "values_exact": true
+    }
+  ],
+  "status": "complete"
+}

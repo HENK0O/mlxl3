@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm/../work/venv/bin/python",
+    "benchmarks/benchmark_lmhead_mb4.py",
+    "--model",
+    "/Users/henko/Library/Application Support/io.mlxl3.desktop/Models/Qwen3.8-27B-exl3-6a9ca9d0",
+    "--output",
+    "docs/measurements/qwen27-post-smallm/mb4-head-window2.json",
+    "--iterations",
+    "40"
+  ],
+  "exit_code": 0,
+  "seconds": 14.089468166988809
+}

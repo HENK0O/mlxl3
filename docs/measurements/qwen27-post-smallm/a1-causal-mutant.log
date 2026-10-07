@@ -1,0 +1,62 @@
+   Compiling mlxl3-native v1.4.1 (/Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm)
+    Finished `release` profile [optimized] target(s) in 20.80s
+warning: the following packages contain code that will be rejected by a future version of Rust: block v0.1.6
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 1`
+  Executable unittests native/src/lib.rs (../work/post-smallm-target/release/deps/mlxl3_native-7403dac709d8357e)
+
+running 1 test
+test qwen35::prepared::prepared_attention_exact_screen ... A1 past=0 M=1: screened three preparations
+A1 past=0 M=2: screened three preparations
+A1 past=0 M=3: screened three preparations
+A1 past=0 M=4: screened three preparations
+A1 past=0 M=5: screened three preparations
+A1 past=0 M=6: screened three preparations
+A1 past=0 M=7: screened three preparations
+A1 past=0 M=8: screened three preparations
+A1 past=1 M=1: screened three preparations
+A1 past=1 M=2: screened three preparations
+A1 past=1 M=3: screened three preparations
+A1 past=1 M=4: screened three preparations
+A1 past=1 M=5: screened three preparations
+A1 past=1 M=6: screened three preparations
+A1 past=1 M=7: screened three preparations
+A1 past=1 M=8: screened three preparations
+A1 past=23 M=1: screened three preparations
+A1 past=23 M=2: screened three preparations
+A1 past=23 M=3: screened three preparations
+A1 past=23 M=4: screened three preparations
+A1 past=23 M=5: screened three preparations
+A1 past=23 M=6: screened three preparations
+A1 past=23 M=7: screened three preparations
+A1 past=23 M=8: screened three preparations
+A1 past=257 M=1: screened three preparations
+A1 past=257 M=2: screened three preparations
+A1 past=257 M=3: screened three preparations
+A1 past=257 M=4: screened three preparations
+A1 past=257 M=5: screened three preparations
+A1 past=257 M=6: screened three preparations
+A1 past=257 M=7: screened three preparations
+A1 past=257 M=8: screened three preparations
+A1 past=4096 M=1: screened three preparations
+A1 past=4096 M=2: screened three preparations
+A1 past=4096 M=3: screened three preparations
+A1 past=4096 M=4: screened three preparations
+A1 past=4096 M=5: screened three preparations
+A1 past=4096 M=6: screened three preparations
+A1 past=4096 M=7: screened three preparations
+A1 past=4096 M=8: screened three preparations
+A1 past=16384 M=1: screened three preparations
+A1 past=16384 M=2: screened three preparations
+A1 past=16384 M=3: screened three preparations
+A1 past=16384 M=4: screened three preparations
+A1 past=16384 M=5: screened three preparations
+A1 past=16384 M=6: screened three preparations
+A1 past=16384 M=7: screened three preparations
+A1 past=16384 M=8: screened three preparations
+A1 mode=BatchAll cases=48 exact=false
+A1 mode=ScalarRope cases=48 exact=false
+A1 mode=ScalarNormRope cases=48 exact=false
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 96 filtered out; finished in 5.15s
+

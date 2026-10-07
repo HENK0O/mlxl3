@@ -1,0 +1,98 @@
+[
+  {
+    "past": 257,
+    "m": 2,
+    "baseline_ms": 2.304146,
+    "candidate_ms": 2.3417294999999996,
+    "paired_gain_pct": -1.0451008138293416,
+    "control_spread_pct": 25.876981662324706
+  },
+  {
+    "past": 257,
+    "m": 3,
+    "baseline_ms": 3.9410419999999995,
+    "candidate_ms": 4.0611250000000005,
+    "paired_gain_pct": -5.168041899847458,
+    "control_spread_pct": 102.90938695787175
+  },
+  {
+    "past": 257,
+    "m": 4,
+    "baseline_ms": 2.524896,
+    "candidate_ms": 2.3668545,
+    "paired_gain_pct": 3.630655342897926,
+    "control_spread_pct": 104.1191721512048
+  },
+  {
+    "past": 4096,
+    "m": 2,
+    "baseline_ms": 1.7741250000000002,
+    "candidate_ms": 1.4485415,
+    "paired_gain_pct": 20.76293339476608,
+    "control_spread_pct": 90.81916557910658
+  },
+  {
+    "past": 4096,
+    "m": 3,
+    "baseline_ms": 2.847979,
+    "candidate_ms": 2.2194789999999998,
+    "paired_gain_pct": 27.11643292045699,
+    "control_spread_pct": 57.34080359147025
+  },
+  {
+    "past": 4096,
+    "m": 4,
+    "baseline_ms": 3.149458,
+    "candidate_ms": 2.35025,
+    "paired_gain_pct": 34.45857047735507,
+    "control_spread_pct": 14.671880574642127
+  },
+  {
+    "past": 16384,
+    "m": 2,
+    "baseline_ms": 4.5642499999999995,
+    "candidate_ms": 3.2803959999999996,
+    "paired_gain_pct": 37.61323852028406,
+    "control_spread_pct": 24.583403808666972
+  },
+  {
+    "past": 16384,
+    "m": 3,
+    "baseline_ms": 6.5969375,
+    "candidate_ms": 4.394979,
+    "paired_gain_pct": 47.86151972720649,
+    "control_spread_pct": 16.849489843829236
+  },
+  {
+    "past": 16384,
+    "m": 4,
+    "baseline_ms": 8.292917000000001,
+    "candidate_ms": 5.067291,
+    "paired_gain_pct": 65.86345376159336,
+    "control_spread_pct": 9.348678831545154
+  },
+  {
+    "past": 32768,
+    "m": 2,
+    "baseline_ms": 8.3212085,
+    "candidate_ms": 5.8958335,
+    "paired_gain_pct": 41.315397641366076,
+    "control_spread_pct": 14.01211537198732
+  },
+  {
+    "past": 32768,
+    "m": 3,
+    "baseline_ms": 12.624166999999998,
+    "candidate_ms": 7.905665999999998,
+    "paired_gain_pct": 59.81267171335651,
+    "control_spread_pct": 7.630443022790745
+  },
+  {
+    "past": 32768,
+    "m": 4,
+    "baseline_ms": 16.082854,
+    "candidate_ms": 9.291687,
+    "paired_gain_pct": 69.54981934854943,
+    "control_spread_pct": 10.38508586825957
+  }
+]

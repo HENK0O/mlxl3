@@ -1,0 +1,8 @@
+
+running 1 test
+test qwen35::profile::real_mtp_round_breakdown ... PROFILE completed code context=4096 D1, exact state/IDs/draft/counters
+PROFILE completed code context=4096 D2, exact state/IDs/draft/counters
+PROFILE completed code context=4096 D3, exact state/IDs/draft/counters
+PROFILE completed code context=8192 D1, exact state/IDs/draft/counters
+PROFILE completed code context=8192 D2, exact state/IDs/draft/counters
+PROFILE completed code context=8192 D3, exact state/IDs/draft/counters

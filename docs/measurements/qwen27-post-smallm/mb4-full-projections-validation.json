@@ -1,0 +1,52 @@
+{
+  "status": "complete",
+  "parity": true,
+  "conditions_before": {
+    "power": "Now drawing from 'Battery Power'\n -InternalBattery-0 (id=36110435)\t65%; discharging; 4:22 remaining present: true\n",
+    "swap": "vm.swapusage: total = 4096.00M  used = 3053.19M  free = 1042.81M  (encrypted)\n",
+    "therm": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded\n"
+  },
+  "shape": {
+    "prefix": "lm_head",
+    "input": 5120,
+    "widths": [
+      248320
+    ],
+    "k": 3,
+    "cb": 2,
+    "dtype": "I16",
+    "prefixes": [
+      "lm_head"
+    ],
+    "count": 1
+  },
+  "mlx_version": "0.32.2",
+  "tensor_sha256": {
+    "lm_head.trellis": "120d0339e81c4171db590deb48799991ac0353dcb53a5207ddb6093a7ed53833",
+    "lm_head.suh": "155699ede7ee3bf248236e297977b277e3fb7bc561e2d59dcd66bae7cc9da0a9",
+    "lm_head.svh": "12b0c1f8cbc7e6c457a1cd4f92a627da005d55c346cef5ff92804b2f524fe2cb"
+  },
+  "fp32_partials_bit_exact": true,
+  "validated_projection_steps": 16,
+  "fp16_forward_and_chain_bit_exact": true,
+  "baseline": {
+    "mb": 2,
+    "nt": 2,
+    "groups": 2,
+    "sg": 8,
+    "splits": 1
+  },
+  "candidate": {
+    "mb": 4,
+    "nt": 1,
+    "groups": 1,
+    "sg": 8,
+    "splits": 1
+  },
+  "boundary": "correctness only; all sixteen complete dependent projections checked, no timing",
+  "conditions_after": {
+    "power": "Now drawing from 'Battery Power'\n -InternalBattery-0 (id=36110435)\t65%; discharging; 4:22 remaining present: true\n",
+    "swap": "vm.swapusage: total = 4096.00M  used = 3053.19M  free = 1042.81M  (encrypted)\n",
+    "therm": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded\n"
+  }
+}

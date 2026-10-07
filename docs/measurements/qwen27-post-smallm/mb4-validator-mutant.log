@@ -1,0 +1,18 @@
+F....                                                                    [100%]
+=================================== FAILURES ===================================
+___________________ test_invalid_times_cannot_complete[True] ___________________
+
+bad = True
+
+    @pytest.mark.parametrize("bad", [True, 0, -1, float("nan"), float("inf")])
+    def test_invalid_times_cannot_complete(bad):
+        report = result()
+        report["dependent"]["samples_ms"][1][2] = bad
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_lmhead_mb4_benchmark.py:52: Failed
+=========================== short test summary info ============================
+FAILED tests/test_lmhead_mb4_benchmark.py::test_invalid_times_cannot_complete[True]
+1 failed, 4 passed, 12 deselected in 0.05s

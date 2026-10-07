@@ -1,0 +1,68 @@
+"""Numerical/reporting gate errors; no MLX or GPU needed."""
+
+import json
+import sys
+from pathlib import Path
+
+import numpy as np
+import pytest
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "benchmarks"))
+import benchmark_verify_attention as bench
+
+
+def test_signed_zero_difference_is_not_bit_exact():
+    a = np.zeros((1, 24, 2, 256), dtype=np.float16)
+    b = a.copy()
+    b[0, 0, 0, 0] = -0.0
+    result = bench.compare_outputs(a, b)
+    assert (
+        result["bit_exact"] is False
+        and result["different_values"] == 1
+        and result["max_abs_diff"] == 0
+    )
+
+
+@pytest.mark.parametrize("bad", [np.nan, np.inf, -np.inf])
+def test_nonfinite_output_rejected(bad):
+    a = np.zeros((1, 24, 2, 256), dtype=np.float16)
+    b = a.copy()
+    b[0, 0, 0, 0] = bad
+    with pytest.raises(ValueError, match="finite"):
+        bench.compare_outputs(a, b)
+
+
+def test_empty_or_different_dtype_rejected():
+    for a, b in [
+        (np.zeros((1, 24, 0, 256), np.float16), np.zeros((1, 24, 0, 256), np.float16)),
+        (np.zeros((1, 24, 2, 256), np.float16), np.zeros((1, 24, 2, 256), np.float32)),
+    ]:
+        with pytest.raises(ValueError):
+            bench.compare_outputs(a, b)
+
+
+def test_incomplete_matrix_cannot_validate():
+    with pytest.raises(ValueError):
+        bench.finish({"cells": []}, False)
+    report = {
+        "cells": [{"kind": "tail_stock", "bit_exact": True} for _ in range(96)]
+        + [{"kind": "nax", "status": "unsupported", "bit_exact": False} for _ in range(216)]
+    }
+    bench.finish(report, True)
+    assert report["parity"] is False
+
+
+@pytest.mark.parametrize("failure", [ValueError("divergence"), KeyboardInterrupt()])
+def test_partial_evidence_preserved_on_failure(tmp_path, monkeypatch, failure):
+    monkeypatch.setattr(bench, "conditions", dict)
+
+    def run(report, *args):
+        report["cells"].append({"kind": "tail_stock", "bit_exact": False})
+        raise failure
+
+    monkeypatch.setattr(bench, "run", run)
+    output = tmp_path / "failure.json"
+    with pytest.raises(type(failure)):
+        bench.main(["--output", str(output)])
+    report = json.loads(output.read_text())
+    assert report["status"] == "failed" and report["parity"] is False and len(report["cells"]) == 1

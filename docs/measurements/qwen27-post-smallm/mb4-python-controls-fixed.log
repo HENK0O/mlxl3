@@ -1,0 +1,13 @@
+2 files reformatted
+B017 Do not assert blind exception: `BaseException`
+  --> tests/test_lmhead_mb4_benchmark.py:77:10
+   |
+75 |     monkeypatch.setattr(bench, "screen", run)
+76 |     output = tmp_path / "failed.json"
+77 |     with pytest.raises(BaseException):
+   |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+78 |         bench.main(["--model", str(tmp_path), "--output", str(output), "--iterations", "3"])
+79 |     report = json.loads(output.read_text())
+   |
+
+Found 1 error.

@@ -1,0 +1,23 @@
+{
+  "sources": {
+    "benchmarks/benchmark_verify_attention.py": "e882e9aba9d4f85187f3fbbc132125e2b5ecb0917b7040b2007620d803fb2442",
+    "tests/test_verify_attention_benchmark.py": "cb0a651c728045b786491a3df14767bb603f7064c84790547b2a5c16c20ba4ba",
+    "../work/mtplx-reference/mtplx/kernels/sdpa_nax_flash.py": "6885420b6588659502926ed2abade8e6f8fc9de60897b26afbcece173abeda0d",
+    "../work/mtplx-reference/mtplx/kernels/sdpa_2pass_paged.py": "04b1be999b88f49f99dd33e40ffd177ecfb2a0cf378c735efd12373a0d60d37f",
+    "../work/mtplx-reference/mtplx/kernels/sdpa_2pass.py": "43624951267d61908bf48a5aa8c7e4a4198477ac67c335e629d9faf65580cdae",
+    "../work/mtplx-reference/mtplx/nax_detect.py": "e4748155ecdb86148d4d69b5f82045497068091a6fb85ad2c9932cdaedbeb2f5",
+    "../work/mtplx-reference/LICENSE": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  "command": [
+    "/Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm/../work/venv/bin/python",
+    "benchmarks/benchmark_verify_attention.py",
+    "--output",
+    "docs/measurements/qwen27-post-smallm/a2c-screen.json",
+    "--mtplx-reference",
+    "/Users/henko/Documents/Codex/2026-10-05/chec/work/mtplx-reference",
+    "--iterations",
+    "12"
+  ],
+  "exit_code": 0,
+  "seconds": 26.957577291002963
+}

@@ -1,0 +1,33 @@
+{
+  "command": [
+    "/Users/henko/Documents/Codex/2026-10-05/chec/work/post-smallm-target/release/deps/mlxl3_native-7403dac709d8357e",
+    "--exact",
+    "qwen35::profile::real_mtp_round_breakdown",
+    "--ignored",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "env": {
+    "MLXL3_MTP_TEST_MODEL": "/Users/henko/Library/Application Support/io.mlxl3.desktop/Models/Qwen3.8-27B-exl3-6a9ca9d0",
+    "MLXL3_MTP_TEST_HEAD": "/Users/henko/Library/Application Support/io.mlxl3.desktop/Drafts/Qwen3.8-27B-MTP-4bit",
+    "MLXL3_PROFILE_CONTEXTS": "4096,8192,16384,32768",
+    "MLXL3_PROFILE_WORKLOAD": "all",
+    "MLXL3_PROFILE_OUTPUT": "/Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm/docs/measurements/qwen27-post-smallm/profile-matrix.json"
+  },
+  "timeout_seconds": 2400,
+  "started_at": "2026-10-07T16:58:12.130931+00:00",
+  "binary_sha256": "7b35e30fb720373823d13a361a645186884b466ffdde704fbf3ab31a1732eb8c",
+  "source_sha256": {
+    "native/src/qwen35.rs": "a9439e366a1978c746417c4d80680ed35ee05ab8491d4d017ece052097ab6f9e",
+    "native/src/qwen35/profile.rs": "83c16180ad2ba6aa77120a32295d5d1232766480a7ef0574a001661907d31952",
+    "native/src/mtp.rs": "b400fd413aeefccf51916856ca0eee3ea50cf7a8a776cf5f97acea193b75e340",
+    "build.rs": "0d008bfd3597d03d0cb193c3f18c6a6f063bf4922690fdcb5975282316c84ab6",
+    "Cargo.toml": "19b4e8ebb5efc6d7bbfd194f72f1a48b92a63ce928f39b34314404ebdc46a484",
+    "Cargo.lock": "39aadb133b92091f5b0c474982041149cf6395fcb9fb134f7b84134e3826729b"
+  },
+  "exit_code": -15,
+  "status": "failed",
+  "elapsed_seconds": 363.275753958,
+  "power_after": "Now drawing from 'Battery Power'\n -InternalBattery-0 (id=36110435)\t80%; discharging; 3:13 remaining present: true\n",
+  "swap_after": "vm.swapusage: total = 7168.00M  used = 5582.31M  free = 1585.69M  (encrypted)\n"
+}

@@ -1,0 +1,35 @@
+{
+  "command": [
+    "/Users/henko/Documents/Codex/2026-10-05/chec/work/post-smallm-profile-v2-tests",
+    "--exact",
+    "qwen35::profile::real_mtp_round_breakdown",
+    "--ignored",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "env": {
+    "MLXL3_MTP_TEST_MODEL": "/Users/henko/Library/Application Support/io.mlxl3.desktop/Models/Qwen3.8-27B-exl3-6a9ca9d0",
+    "MLXL3_MTP_TEST_HEAD": "/Users/henko/Library/Application Support/io.mlxl3.desktop/Drafts/Qwen3.8-27B-MTP-4bit",
+    "MLXL3_PROFILE_CONTEXTS": "24",
+    "MLXL3_PROFILE_WORKLOAD": "code",
+    "MLXL3_PROFILE_OUTPUT": "/Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm/docs/measurements/qwen27-post-smallm/profile-smoke-v2.json"
+  },
+  "timeout_seconds": 180,
+  "started_at": "2026-10-07T17:14:48.957633+00:00",
+  "binary_sha256": "2ea838f274ada1601d293786b921662f377e8d044e5b099ad688b5756fe12388",
+  "source_sha256": {
+    "native/src/qwen35.rs": "a9439e366a1978c746417c4d80680ed35ee05ab8491d4d017ece052097ab6f9e",
+    "native/src/qwen35/profile.rs": "d22425e9dd94ed5e3f8f4902379c842c2f38e83b2ff8162659c02f3c1cab9ced",
+    "native/src/mtp.rs": "b400fd413aeefccf51916856ca0eee3ea50cf7a8a776cf5f97acea193b75e340",
+    "build.rs": "0d008bfd3597d03d0cb193c3f18c6a6f063bf4922690fdcb5975282316c84ab6",
+    "Cargo.toml": "19b4e8ebb5efc6d7bbfd194f72f1a48b92a63ce928f39b34314404ebdc46a484",
+    "Cargo.lock": "39aadb133b92091f5b0c474982041149cf6395fcb9fb134f7b84134e3826729b"
+  },
+  "power_before": "Now drawing from 'Battery Power'\n -InternalBattery-0 (id=36110435)\t80%; discharging; 4:13 remaining present: true\n",
+  "swap_before": "vm.swapusage: total = 4096.00M  used = 3007.31M  free = 1088.69M  (encrypted)\n",
+  "exit_code": 0,
+  "status": "complete",
+  "elapsed_seconds": 19.535510542,
+  "power_after": "Now drawing from 'Battery Power'\n -InternalBattery-0 (id=36110435)\t79%; discharging; 4:13 remaining present: true\n",
+  "swap_after": "vm.swapusage: total = 4096.00M  used = 3186.19M  free = 909.81M  (encrypted)\n"
+}

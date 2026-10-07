@@ -1,0 +1,57 @@
+......FFFF..                                                             [100%]
+=================================== FAILURES ===================================
+______________ test_duplicate_cells_cannot_claim_complete_matrix _______________
+
+    def test_duplicate_cells_cannot_claim_complete_matrix():
+        report = matrix()
+        report["cells"][-1] = report["cells"][0].copy()
+>       with pytest.raises(ValueError, match="matrix"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_verify_attention_benchmark.py:67: Failed
+____________ test_invalid_cell_metrics_cannot_validate[bit_exact-1] ____________
+
+key = 'bit_exact', bad = 1
+
+    @pytest.mark.parametrize("key,bad",[("bit_exact",1),("max_abs_diff",float("nan")),("different_values",True)])
+    def test_invalid_cell_metrics_cannot_validate(key,bad):
+        report=matrix()
+        report["cells"][0][key]=bad
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_verify_attention_benchmark.py:75: Failed
+_________ test_invalid_cell_metrics_cannot_validate[max_abs_diff-nan] __________
+
+key = 'max_abs_diff', bad = nan
+
+    @pytest.mark.parametrize("key,bad",[("bit_exact",1),("max_abs_diff",float("nan")),("different_values",True)])
+    def test_invalid_cell_metrics_cannot_validate(key,bad):
+        report=matrix()
+        report["cells"][0][key]=bad
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_verify_attention_benchmark.py:75: Failed
+_______ test_invalid_cell_metrics_cannot_validate[different_values-True] _______
+
+key = 'different_values', bad = True
+
+    @pytest.mark.parametrize("key,bad",[("bit_exact",1),("max_abs_diff",float("nan")),("different_values",True)])
+    def test_invalid_cell_metrics_cannot_validate(key,bad):
+        report=matrix()
+        report["cells"][0][key]=bad
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_verify_attention_benchmark.py:75: Failed
+=========================== short test summary info ============================
+FAILED tests/test_verify_attention_benchmark.py::test_duplicate_cells_cannot_claim_complete_matrix
+FAILED tests/test_verify_attention_benchmark.py::test_invalid_cell_metrics_cannot_validate[bit_exact-1]
+FAILED tests/test_verify_attention_benchmark.py::test_invalid_cell_metrics_cannot_validate[max_abs_diff-nan]
+FAILED tests/test_verify_attention_benchmark.py::test_invalid_cell_metrics_cannot_validate[different_values-True]
+4 failed, 8 passed in 0.09s

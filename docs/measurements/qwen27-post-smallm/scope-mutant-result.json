@@ -1,0 +1,6 @@
+{
+  "exit_code": 101,
+  "detected": true,
+  "mutation": "remove Scope::drop clearing ACTIVE",
+  "production_restored": true
+}

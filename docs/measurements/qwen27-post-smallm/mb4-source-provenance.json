@@ -1,0 +1,5 @@
+{
+  "benchmarks/benchmark_lmhead_mb4.py": "4661b4ffa0da4b6c50aae56b4c1c00be5e364626f69d85928ebc8e67b9649324",
+  "benchmarks/benchmark_smallm.py": "f556d52ed5bb515eddb45b55a13d09fd66d77533a1116e175a45313428c52122",
+  "native/shaders/_qmv_tile_kernel.metal": "594c573571ef6be4e8276299f05c7ebc264eb39f95a6edb9a3fe30c0b998d2cd"
+}

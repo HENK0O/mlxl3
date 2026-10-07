@@ -1,0 +1,519 @@
+{
+  "status": "complete",
+  "excluded": "embedded MTP layer: not one of the 64 trunk layers",
+  "numerical_contract": "original FP16 transform bytes; no projection or model throughput measured",
+  "layers": [
+    {
+      "prefix": "model.language_model.layers.11.self_attn",
+      "suh_shape": [
+        [
+          5120
+        ],
+        [
+          5120
+        ],
+        [
+          5120
+        ]
+      ],
+      "suh_sha256": [
+        "a39ace3eebb11cacc52f4b987fd8131382f31c5d990ac5e7627b7daf08d97ee3",
+        "aaf5d056b8d11b1d2378ec2d105d9744e88d6f6b56e01d3a685fcc9749551ef7",
+        "ed5d997a22a469c08261893ceccc4bdb3e92ed9b5505df84586a2b1b82d32f0d"
+      ],
+      "qk_equal": false,
+      "qv_equal": false,
+      "kv_equal": false,
+      "k": [
+        1,
+        3,
+        3
+      ],
+      "widths": [
+        12288,
+        1024,
+        1024
+      ]
+    },
+    {
+      "prefix": "model.language_model.layers.15.self_attn",
+      "suh_shape": [
+        [
+          5120
+        ],
+        [
+          5120
+        ],
+        [
+          5120
+        ]
+      ],
+      "suh_sha256": [
+        "b1a54d4e0ec30f8c54b51b6f224d5773527504f195510f4eb6dfbc7d35c1d9c3",
+        "a850b36b89d6b19754bde5c6c237cdaf9075a8e19a16b41913ae0f35919abf2a",
+        "29679c4cca34c26a35d6df624e33d59ea00c249486f433181ddf694ea2670a6e"
+      ],
+      "qk_equal": false,
+      "qv_equal": false,
+      "kv_equal": false,
+      "k": [
+        2,
+        3,
+        3
+      ],
+      "widths": [
+        12288,
+        1024,
+        1024
+      ]
+    },
+    {
+      "prefix": "model.language_model.layers.19.self_attn",
+      "suh_shape": [
+        [
+          5120
+        ],
+        [
+          5120
+        ],
+        [
+          5120
+        ]
+      ],
+      "suh_sha256": [
+        "1b8110df7f4364fc83981eeaad5dc3bae765e8a41730433a4eb5ea5caf80ca97",
+        "233fa6ceebae1663da61bdfdd253b0e8e87864aaa49b9702c959a83700c18812",
+        "91a4ad00a6cd0ffd6f1b7c455b7ec807191de13a6736fe4da3de17e0bb228ee0"
+      ],
+      "qk_equal": false,
+      "qv_equal": false,
+      "kv_equal": false,
+      "k": [
+        2,
+        3,
+        3
+      ],
+      "widths": [
+        12288,
+        1024,
+        1024
+      ]
+    },
+    {
+      "prefix": "model.language_model.layers.23.self_attn",
+      "suh_shape": [
+        [
+          5120
+        ],
+        [
+          5120
+        ],
+        [
+          5120
+        ]
+      ],
+      "suh_sha256": [
+        "c74cfb65e776b3829f97bb0e68d74905a4831748172bd732e22a431acde945b9",
+        "0dde112364c3e657c0e2042db6e7fa257f2682c496b7f646ea45bf20c687048f",
+        "6d60c2cab88a3bbb044a70bbc22b6256684614f61dade245a2522a34218288bd"
+      ],
+      "qk_equal": false,
+      "qv_equal": false,
+      "kv_equal": false,
+      "k": [
+        2,
+        3,
+        3
+      ],
+      "widths": [
+        12288,
+        1024,
+        1024
+      ]
+    },
+    {
+      "prefix": "model.language_model.layers.27.self_attn",
+      "suh_shape": [
+        [
+          5120
+        ],
+        [
+          5120
+        ],
+        [
+          5120
+        ]
+      ],
+      "suh_sha256": [
+        "7db97d60865980dbcd56ced1b7148abe290cca4a5880a03a2f1647855cf86b16",
+        "c7c96b7294ed32403e9868af9f551dac55bb5c11ccfad23cff5fd1873072674b",
+        "ddd97b8a8dcad95386305b938d310b62b09e55739b9e28defc3bc5e3417d606f"
+      ],
+      "qk_equal": false,
+      "qv_equal": false,
+      "kv_equal": false,
+      "k": [
+        2,
+        4,
+        4
+      ],
+      "widths": [
+        12288,
+        1024,
+        1024
+      ]
+    },
+    {
+      "prefix": "model.language_model.layers.3.self_attn",
+      "suh_shape": [
+        [
+          5120
+        ],
+        [
+          5120
+        ],
+        [
+          5120
+        ]
+      ],
+      "suh_sha256": [
+        "930f0cc0f07cfc64cdad923f375f3021abcdd4e3c9a2037e5cf4950c9f083a03",
+        "8306b91d787097b2c71ebf3524ba6970fefaf10c0841c31ed5fa61a9cc56569c",
+        "9a07975b0ca8e19aef632c725832665c9a49cf42b4625f315fde7655d61e39f0"
+      ],
+      "qk_equal": false,
+      "qv_equal": false,
+      "kv_equal": false,
+      "k": [
+        2,
+        3,
+        3
+      ],
+      "widths": [
+        12288,
+        1024,
+        1024
+      ]
+    },
+    {
+      "prefix": "model.language_model.layers.31.self_attn",
+      "suh_shape": [
+        [
+          5120
+        ],
+        [
+          5120
+        ],
+        [
+          5120
+        ]
+      ],
+      "suh_sha256": [
+        "12d4ef573eb7b8f3b2da7bfe02dd952f44b0dc012888c9963272d90c8687bc31",
+        "26b7fc9a1ef1ac745df5a3e3cb7c0b11bd925a60a04fd012a712fa411710bd16",
+        "4e6b2ccda346c187c177318699f2dcb1c54b78ef4c0221db3a0a9f36fbf967ae"
+      ],
+      "qk_equal": false,
+      "qv_equal": false,
+      "kv_equal": false,
+      "k": [
+        2,
+        4,
+        4
+      ],
+      "widths": [
+        12288,
+        1024,
+        1024
+      ]
+    },
+    {
+      "prefix": "model.language_model.layers.35.self_attn",
+      "suh_shape": [
+        [
+          5120
+        ],
+        [
+          5120
+        ],
+        [
+          5120
+        ]
+      ],
+      "suh_sha256": [
+        "874deebf0ecc1c8c7a086996d0e58a65a86445b1f2811d3f85f65d5a6704bb46",
+        "bc1b354e06dd3256bbbd3413b6aa842f46469639306b4407e2bb27c01732a423",
+        "0250abc6b16c347b691a3167627c34e29c4f7a1da8bfe274caf44d2e1adc6b09"
+      ],
+      "qk_equal": false,
+      "qv_equal": false,
+      "kv_equal": false,
+      "k": [
+        2,
+        4,
+        4
+      ],
+      "widths": [
+        12288,
+        1024,
+        1024
+      ]
+    },
+    {
+      "prefix": "model.language_model.layers.39.self_attn",
+      "suh_shape": [
+        [
+          5120
+        ],
+        [
+          5120
+        ],
+        [
+          5120
+        ]
+      ],
+      "suh_sha256": [
+        "fde4d636f64c9c02b8198e9b6b5346fdc879e5d8e339ea29a2125fc5ab09bcd5",
+        "7ee665a80b873990b434a5ccd419c86c28b1922eb1a9ddf77954a0d858ae80eb",
+        "af104bc127976f646ad87bb2cf785b4286edf6952725eb026cd577eabcd7aa50"
+      ],
+      "qk_equal": false,
+      "qv_equal": false,
+      "kv_equal": false,
+      "k": [
+        2,
+        4,
+        4
+      ],
+      "widths": [
+        12288,
+        1024,
+        1024
+      ]
+    },
+    {
+      "prefix": "model.language_model.layers.43.self_attn",
+      "suh_shape": [
+        [
+          5120
+        ],
+        [
+          5120
+        ],
+        [
+          5120
+        ]
+      ],
+      "suh_sha256": [
+        "16521bd6fce37a062aa3d6b6deb0b2375cdb83f8f7525d61dc6aa616bb81d857",
+        "c12f58cad7c6a31c5cbec96f3f6006ae4be6c591afde011599cf18c775669eda",
+        "a3b0c7ea39e2c934fa1a69eeecee25e0f2a8747cc34e09476ec8486c17383c53"
+      ],
+      "qk_equal": false,
+      "qv_equal": false,
+      "kv_equal": false,
+      "k": [
+        2,
+        4,
+        4
+      ],
+      "widths": [
+        12288,
+        1024,
+        1024
+      ]
+    },
+    {
+      "prefix": "model.language_model.layers.47.self_attn",
+      "suh_shape": [
+        [
+          5120
+        ],
+        [
+          5120
+        ],
+        [
+          5120
+        ]
+      ],
+      "suh_sha256": [
+        "7b44cf87725dc8bfaf6f8877f88ce43aa08d59f48752374cdadcbc2c9fb42030",
+        "06a8168524e7b1fe8b6e66b046c2013f78105b883900779bf2dabb8c895125d8",
+        "16cf3e54de4323e9c5f007bea250eefcd76ccfdd875b1aef12a2ed290a920d10"
+      ],
+      "qk_equal": false,
+      "qv_equal": false,
+      "kv_equal": false,
+      "k": [
+        2,
+        4,
+        4
+      ],
+      "widths": [
+        12288,
+        1024,
+        1024
+      ]
+    },
+    {
+      "prefix": "model.language_model.layers.51.self_attn",
+      "suh_shape": [
+        [
+          5120
+        ],
+        [
+          5120
+        ],
+        [
+          5120
+        ]
+      ],
+      "suh_sha256": [
+        "07baf4a72923ac617e94d1d604ac29e9daf3dea8a9b727a4b167c90aa82ef63e",
+        "02e5bc970ae28d336edae96c91de6e66b907a432227d6de4ebe54968e1933b2c",
+        "fb4dbca7c28ae3d65da00ef3857adf32fae5e2ca63305179bd5e871c9fc3b6ab"
+      ],
+      "qk_equal": false,
+      "qv_equal": false,
+      "kv_equal": false,
+      "k": [
+        2,
+        4,
+        4
+      ],
+      "widths": [
+        12288,
+        1024,
+        1024
+      ]
+    },
+    {
+      "prefix": "model.language_model.layers.55.self_attn",
+      "suh_shape": [
+        [
+          5120
+        ],
+        [
+          5120
+        ],
+        [
+          5120
+        ]
+      ],
+      "suh_sha256": [
+        "6920b46e481288a0bdbe4c9fc6ddeb379e49a8733791810980fd5672fc6f6aa1",
+        "4c6cfde78d64fd6f5345b7c95422b225abbc65d2652f99dfd93831cdf6aeae2a",
+        "5a0058d229a1ab0b0d58ae6095f43bb7bc8bb9940559ee46e1c1078f63246c08"
+      ],
+      "qk_equal": false,
+      "qv_equal": false,
+      "kv_equal": false,
+      "k": [
+        2,
+        3,
+        3
+      ],
+      "widths": [
+        12288,
+        1024,
+        1024
+      ]
+    },
+    {
+      "prefix": "model.language_model.layers.59.self_attn",
+      "suh_shape": [
+        [
+          5120
+        ],
+        [
+          5120
+        ],
+        [
+          5120
+        ]
+      ],
+      "suh_sha256": [
+        "79beb001213d8b2e344596b805abf97ec92e25c84df7654da8069def2f166227",
+        "fac9dadbcd05473ce53190fa3a5433085e521066e6619349dc16368267f90523",
+        "f4422bfb58a4ab7ef8a1f3e20f9c41be9ab3d2f47628951f2d5c5319ffc5a812"
+      ],
+      "qk_equal": false,
+      "qv_equal": false,
+      "kv_equal": false,
+      "k": [
+        2,
+        3,
+        3
+      ],
+      "widths": [
+        12288,
+        1024,
+        1024
+      ]
+    },
+    {
+      "prefix": "model.language_model.layers.63.self_attn",
+      "suh_shape": [
+        [
+          5120
+        ],
+        [
+          5120
+        ],
+        [
+          5120
+        ]
+      ],
+      "suh_sha256": [
+        "f2226769bb1bccfe22e5f483dc605fa84582ab6ac5d606a2b2e9cfbf41d6d508",
+        "aed3832bb4bde91231f73c447fd4235432c08e5bd97ec5dfdda611f6ce7c92bf",
+        "ecc73fb1b868b4d858793a54df0c3bda290cbe8f072e14aba1a23fc8e99581fb"
+      ],
+      "qk_equal": false,
+      "qv_equal": false,
+      "kv_equal": false,
+      "k": [
+        2,
+        3,
+        3
+      ],
+      "widths": [
+        12288,
+        1024,
+        1024
+      ]
+    },
+    {
+      "prefix": "model.language_model.layers.7.self_attn",
+      "suh_shape": [
+        [
+          5120
+        ],
+        [
+          5120
+        ],
+        [
+          5120
+        ]
+      ],
+      "suh_sha256": [
+        "f6ad9159496532cbce2bf8a80ef37cabaca675795b60fe5b6d1493dbdeec9fd7",
+        "4fd94f2b0a7147fb65998935f6cb148ba92c840b6134f185d0d6501329374cac",
+        "3bbc71b51e6f35480e003324b8215dbd4e785bd2aa6d5fc92a951d6346280ed7"
+      ],
+      "qk_equal": false,
+      "qv_equal": false,
+      "kv_equal": false,
+      "k": [
+        1,
+        3,
+        3
+      ],
+      "widths": [
+        12288,
+        1024,
+        1024
+      ]
+    }
+  ]
+}

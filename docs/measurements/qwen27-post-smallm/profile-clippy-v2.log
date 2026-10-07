@@ -1,0 +1,13 @@
+   Compiling mlxl3-native v1.4.1 (/Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm)
+error: manual implementation of `.is_multiple_of()`
+   --> native/src/qwen35/profile.rs:129:28
+    |
+129 |     if bytes.is_empty() || bytes.len() % dtype.item_size() != 0 {
+    |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: replace with: `!bytes.len().is_multiple_of(dtype.item_size())`
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#manual_is_multiple_of
+    = note: `-D clippy::manual-is-multiple-of` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::manual_is_multiple_of)]`
+
+error: could not compile `mlxl3-native` (lib test) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...

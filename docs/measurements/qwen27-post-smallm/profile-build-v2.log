@@ -1,0 +1,40 @@
+   Compiling mlxl3-native v1.4.1 (/Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm)
+error[E0599]: no method named `bytes` found for enum `array::Dtype` in the current scope
+   --> native/src/qwen35/profile.rs:129:48
+    |
+129 |     if bytes.is_empty() || bytes.len() % dtype.bytes() != 0 {
+    |                                                ^^^^^ method not found in `array::Dtype`
+    |
+   ::: native/src/array.rs:16:1
+    |
+ 16 | pub enum Dtype {
+    | -------------- method `bytes` not found for this enum
+    |
+    = help: items from traits can only be used if the trait is implemented and in scope
+    = note: the following trait defines an item `bytes`, perhaps you need to implement it:
+            candidate #1: `std::io::Read`
+
+error[E0282]: type annotations needed for `std::option::Option<(_, _, (Vec<u8>, Vec<u8>), (usize, usize, usize), _)>`
+   --> native/src/qwen35/profile.rs:372:25
+    |
+372 |                     let mut reference = None;
+    |                         ^^^^^^^^^^^^^
+...
+462 |                                 expected_state.compare(&state)?;
+    |                                 -------------- type must be known at this point
+    |
+help: consider giving `reference` an explicit type, where the placeholders `_` are specified
+    |
+372 |                     let mut reference: std::option::Option<(_, _, _, _, _)> = None;
+    |                                      ++++++++++++++++++++++++++++++++++++++
+
+error[E0425]: cannot find function `exact_state` in this scope
+   --> native/src/qwen35/profile.rs:464:33
+    |
+464 | ...                   exact_state(&state, &state)?;
+    |                       ^^^^^^^^^^^ not found in this scope
+
+Some errors have detailed explanations: E0282, E0425, E0599.
+For more information about an error, try `rustc --explain E0282`.
+error: could not compile `mlxl3-native` (lib test) due to 3 previous errors
+warning: build failed, waiting for other jobs to finish...

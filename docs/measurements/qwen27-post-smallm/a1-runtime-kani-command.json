@@ -1,0 +1,13 @@
+{
+  "command": [
+    "cargo",
+    "kani",
+    "--lib",
+    "--no-default-features",
+    "--harness",
+    "batched_verify_gate_never_overflows_or_changes_other_shapes",
+    "--harness-timeout",
+    "120"
+  ],
+  "exit_code": 2
+}

@@ -1,0 +1,20 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_________________ test_signed_zero_difference_is_not_bit_exact _________________
+
+    def test_signed_zero_difference_is_not_bit_exact():
+        a = np.zeros((1, 24, 2, 256), dtype=np.float16)
+        b = a.copy()
+        b[0, 0, 0, 0] = -0.0
+        result = bench.compare_outputs(a, b)
+>       assert (
+            result["bit_exact"] is False
+            and result["different_values"] == 1
+            and result["max_abs_diff"] == 0
+        )
+E       assert (True is False)
+
+tests/test_verify_attention_benchmark.py:20: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_verify_attention_benchmark.py::test_signed_zero_difference_is_not_bit_exact
+1 failed, 11 deselected in 0.04s

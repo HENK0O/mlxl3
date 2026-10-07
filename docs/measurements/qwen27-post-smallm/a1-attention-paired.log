@@ -1,0 +1,18 @@
+
+running 1 test
+test qwen35::prepared::prepared_attention_paired ... A1 paired past=257 M=2 complete
+A1 paired past=257 M=3 complete
+A1 paired past=257 M=4 complete
+A1 paired past=4096 M=2 complete
+A1 paired past=4096 M=3 complete
+A1 paired past=4096 M=4 complete
+A1 paired past=16384 M=2 complete
+A1 paired past=16384 M=3 complete
+A1 paired past=16384 M=4 complete
+A1 paired past=32768 M=2 complete
+A1 paired past=32768 M=3 complete
+A1 paired past=32768 M=4 complete
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 95 filtered out; finished in 2.65s
+

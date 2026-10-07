@@ -1,0 +1,16 @@
+{
+  "command": [
+    "cargo",
+    "kani",
+    "-Z",
+    "unstable-options",
+    "--tests",
+    "--features",
+    "mlx,chat",
+    "--harness",
+    "preparation_scope_restores_real_override",
+    "--harness-timeout",
+    "120"
+  ],
+  "exit_code": 0
+}

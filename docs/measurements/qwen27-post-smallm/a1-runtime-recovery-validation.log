@@ -1,0 +1,12 @@
+
+running 1 test
+test qwen35::prepared::prepared_model_verification_paired ... A1 model context=24 M=2: full logits/129 states/all commits exact, validation_only=true
+A1 model context=24 M=3: full logits/129 states/all commits exact, validation_only=true
+A1 model context=24 M=4: full logits/129 states/all commits exact, validation_only=true
+A1 model context=16384 M=2: full logits/129 states/all commits exact, validation_only=true
+A1 model context=16384 M=3: full logits/129 states/all commits exact, validation_only=true
+A1 model context=16384 M=4: full logits/129 states/all commits exact, validation_only=true
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 97 filtered out; finished in 194.37s
+

@@ -1,0 +1,197 @@
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.24
+   Compiling quote v1.0.47
+   Compiling libc v0.2.189
+   Compiling serde_core v1.0.229
+   Compiling cfg-if v1.0.4
+   Compiling shlex v2.0.1
+   Compiling find-msvc-tools v0.1.12
+   Compiling serde v1.0.229
+   Compiling crossbeam-utils v0.8.23
+   Compiling once_cell v1.21.4
+   Compiling zerocopy v0.8.57
+   Compiling cc v1.4.5
+   Compiling strsim v0.11.1
+   Compiling ident_case v1.0.1
+   Compiling fnv v1.0.7
+   Compiling getrandom v0.3.4
+   Compiling memchr v2.8.3
+   Compiling crossbeam-epoch v0.9.21
+   Compiling itoa v1.0.18
+   Compiling pin-project-lite v0.2.17
+   Compiling crossbeam-deque v0.8.8
+   Compiling bitflags v2.13.2
+   Compiling bytes v1.11.1
+   Compiling rayon-core v1.13.0
+   Compiling futures-core v0.3.34
+   Compiling rustversion v1.0.23
+   Compiling pkg-config v0.3.34
+   Compiling errno v0.3.14
+   Compiling socket2 v0.6.3
+   Compiling signal-hook-registry v1.4.8
+   Compiling syn v2.0.119
+   Compiling syn v3.0.5
+   Compiling mio v1.2.0
+   Compiling utf8parse v0.2.2
+   Compiling onig_sys v69.9.3
+   Compiling portable-atomic v1.15.0
+   Compiling either v1.18.0
+   Compiling version_check v0.9.5
+   Compiling paste v1.0.15
+   Compiling zmij v1.0.23
+   Compiling ahash v0.8.12
+   Compiling http v0.2.12
+   Compiling anstyle-parse v1.0.0
+   Compiling rand_core v0.9.5
+   Compiling esaxx-rs v0.1.10
+   Compiling aho-corasick v1.1.5
+   Compiling tracing-core v0.1.36
+   Compiling is_terminal_polyfill v1.70.2
+   Compiling anstyle-query v1.1.5
+   Compiling httparse v1.10.1
+   Compiling thiserror v2.0.20
+   Compiling hashbrown v0.16.1
+   Compiling futures-sink v0.3.32
+   Compiling futures-task v0.3.34
+   Compiling serde_json v1.0.151
+   Compiling minimal-lexical v0.2.1
+   Compiling core-foundation-sys v0.8.7
+   Compiling regex-syntax v0.8.11
+   Compiling colorchoice v1.0.5
+   Compiling anstyle v1.0.14
+   Compiling equivalent v1.0.2
+   Compiling rustix v1.1.4
+   Compiling unicode-width v0.2.2
+   Compiling getrandom v0.4.3
+   Compiling indexmap v2.13.0
+   Compiling anstream v1.0.0
+   Compiling console v0.16.6
+   Compiling darling_core v0.20.11
+   Compiling nom v7.1.3
+   Compiling core-foundation v0.10.1
+   Compiling futures-util v0.3.34
+   Compiling serde_derive v1.0.229
+   Compiling thiserror-impl v2.0.20
+   Compiling foreign-types-macros v0.2.4
+   Compiling regex-automata v0.4.18
+   Compiling zerocopy-derive v0.8.57
+   Compiling tokio-macros v2.6.1
+   Compiling monostate-impl v0.1.18
+   Compiling tracing v0.1.44
+   Compiling darling_macro v0.20.11
+   Compiling rayon v1.12.0
+   Compiling tokio v1.50.0
+   Compiling castaway v0.2.4
+   Compiling darling v0.20.11
+   Compiling derive_builder_core v0.20.2
+   Compiling derive_builder_macro v0.20.2
+   Compiling itertools v0.14.0
+   Compiling malloc_buf v0.0.6
+   Compiling foreign-types-shared v0.3.1
+   Compiling base64 v0.13.1
+   Compiling heck v0.5.0
+   Compiling try-lock v0.2.5
+   Compiling clap_lex v1.1.0
+   Compiling ryu v1.0.23
+   Compiling slab v0.4.12
+   Compiling anyhow v1.0.104
+   Compiling unit-prefix v0.5.2
+   Compiling signal-hook v0.3.18
+   Compiling smallvec v1.16.1
+   Compiling unicode-segmentation v1.13.3
+   Compiling static_assertions v1.1.0
+   Compiling pastey v0.2.3
+   Compiling macro_rules_attribute-proc_macro v0.2.3
+   Compiling memo-map v0.3.4
+   Compiling log v0.4.34
+   Compiling minijinja v2.24.0
+   Compiling spm_precompiled v0.1.4
+   Compiling clap_builder v4.6.6
+   Compiling compact_str v0.9.1
+   Compiling macro_rules_attribute v0.2.3
+   Compiling rayon-cond v0.4.0
+   Compiling onig v6.5.3
+   Compiling unicode-normalization-alignments v0.1.12
+   Compiling indicatif v0.18.6
+   Compiling dary_heap v0.3.9
+   Compiling clap_derive v4.6.4
+   Compiling want v0.3.1
+   Compiling foreign-types v0.5.0
+   Compiling objc v0.2.7
+   Compiling derive_builder v0.20.2
+   Compiling ppv-lite86 v0.2.21
+   Compiling regex v1.13.1
+   Compiling rand_chacha v0.9.0
+   Compiling tokio-util v0.7.18
+   Compiling rand v0.9.5
+   Compiling h2 v0.3.27
+   Compiling monostate v0.1.18
+   Compiling core-graphics-types v0.2.0
+   Compiling http-body v0.4.6
+   Compiling futures-channel v0.3.32
+   Compiling socket2 v0.5.10
+   Compiling block v0.1.6
+   Compiling time-core v0.1.9
+   Compiling num-conv v0.2.2
+   Compiling unicode_categories v0.1.1
+   Compiling mlxl3-native v1.4.1 (/Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm)
+   Compiling tower-service v0.3.3
+   Compiling daachorse v3.0.3
+   Compiling httpdate v1.0.3
+   Compiling powerfmt v0.2.0
+   Compiling deranged v0.5.8
+   Compiling fastrand v2.5.0
+   Compiling tempfile v3.27.0
+   Compiling tokenizers v0.23.2
+   Compiling minijinja-contrib v2.24.0
+   Compiling metal v0.33.0
+   Compiling clap v4.6.6
+   Compiling time v0.3.55
+   Compiling hyper v0.14.32
+   Compiling half v2.7.1
+   Compiling fs2 v0.4.3
+error[E0624]: method `eval_cache` is private
+   --> native/src/qwen35/profile.rs:266:26
+    |
+266 |                     head.eval_cache()?;
+    |                          ^^^^^^^^^^ private method
+    |
+   ::: native/src/mtp.rs:519:9
+    |
+519 |         fn eval_cache(&self) -> Result<()> {
+    |         ---------------------------------- private method defined here
+
+error[E0599]: no method named `clone` found for struct `native::Cache` in the current scope
+   --> native/src/qwen35/profile.rs:277:48
+    |
+277 |                         head.restore(head_base.clone())?;
+    |                                                ^^^^^ method not found in `native::Cache`
+    |
+   ::: native/src/mtp.rs:350:5
+    |
+350 |     pub struct Cache {
+    |     ---------------- method `clone` not found for this struct
+    |
+    = help: items from traits can only be used if the trait is implemented and in scope
+    = note: the following trait defines an item `clone`, perhaps you need to implement it:
+            candidate #1: `Clone`
+
+error[E0599]: no method named `clone` found for struct `native::Cache` in the current scope
+   --> native/src/qwen35/profile.rs:296:52
+    |
+296 | ...                   head.restore(head_base.clone())?;
+    |                                              ^^^^^ method not found in `native::Cache`
+    |
+   ::: native/src/mtp.rs:350:5
+    |
+350 |     pub struct Cache {
+    |     ---------------- method `clone` not found for this struct
+    |
+    = help: items from traits can only be used if the trait is implemented and in scope
+    = note: the following trait defines an item `clone`, perhaps you need to implement it:
+            candidate #1: `Clone`
+
+Some errors have detailed explanations: E0599, E0624.
+For more information about an error, try `rustc --explain E0599`.
+error: could not compile `mlxl3-native` (lib test) due to 3 previous errors
+warning: build failed, waiting for other jobs to finish...

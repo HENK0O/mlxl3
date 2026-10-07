@@ -1,0 +1,70 @@
+{
+  "boundary": "real target verify_mtp, stock/BatchAll; output+raw+full-state synchronized, no forced component fences; not MTP advance or sustained generation",
+  "cells": [
+    {
+      "bit_exact": true,
+      "commits_checked": 2,
+      "context": 16384,
+      "m": 2,
+      "production_route": true,
+      "samples_seconds": [
+        [
+          0.397168458,
+          0.400692542,
+          0.39816425,
+          0.398589833,
+          0.393583833,
+          0.403378541,
+          0.395902333,
+          0.402766833
+        ],
+        [
+          0.379139833,
+          0.383751667,
+          0.379663458,
+          0.377798584,
+          0.368425708,
+          0.387731084,
+          0.378903458,
+          0.380471042
+        ]
+      ],
+      "state_arrays": 129,
+      "validation_only": false
+    },
+    {
+      "bit_exact": true,
+      "commits_checked": 3,
+      "context": 16384,
+      "m": 3,
+      "production_route": true,
+      "samples_seconds": [
+        [
+          0.638252208,
+          0.631339291,
+          0.581292875,
+          0.623261292,
+          0.612105209,
+          0.596646833,
+          0.639133583,
+          0.653402958
+        ],
+        [
+          0.591620334,
+          0.5902205,
+          0.560545917,
+          0.617093333,
+          0.623443583,
+          0.578686833,
+          0.585742625,
+          0.568068667
+        ]
+      ],
+      "state_arrays": 129,
+      "validation_only": false
+    }
+  ],
+  "error": null,
+  "parity": false,
+  "status": "running"
+}

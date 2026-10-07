@@ -1,0 +1,107 @@
+2 files reformatted
+B023 Function definition does not bind loop variable `q`
+   --> benchmarks/benchmark_verify_attention.py:146:33
+    |
+144 |                 def candidate(_=1):
+145 |                     return sdpa_nax_flash(
+146 |                         queries=q, keys=k, values=v, offset=past + rows, scale=1 / 16
+    |                                 ^
+147 |                     )
+    |
+
+B023 Function definition does not bind loop variable `k`
+   --> benchmarks/benchmark_verify_attention.py:146:41
+    |
+144 |                 def candidate(_=1):
+145 |                     return sdpa_nax_flash(
+146 |                         queries=q, keys=k, values=v, offset=past + rows, scale=1 / 16
+    |                                         ^
+147 |                     )
+    |
+
+B023 Function definition does not bind loop variable `v`
+   --> benchmarks/benchmark_verify_attention.py:146:51
+    |
+144 |                 def candidate(_=1):
+145 |                     return sdpa_nax_flash(
+146 |                         queries=q, keys=k, values=v, offset=past + rows, scale=1 / 16
+    |                                                   ^
+147 |                     )
+    |
+
+B023 Function definition does not bind loop variable `past`
+   --> benchmarks/benchmark_verify_attention.py:146:61
+    |
+144 |                 def candidate(_=1):
+145 |                     return sdpa_nax_flash(
+146 |                         queries=q, keys=k, values=v, offset=past + rows, scale=1 / 16
+    |                                                             ^^^^
+147 |                     )
+    |
+
+B023 Function definition does not bind loop variable `rows`
+   --> benchmarks/benchmark_verify_attention.py:146:68
+    |
+144 |                 def candidate(_=1):
+145 |                     return sdpa_nax_flash(
+146 |                         queries=q, keys=k, values=v, offset=past + rows, scale=1 / 16
+    |                                                                    ^^^^
+147 |                     )
+    |
+
+B023 Function definition does not bind loop variable `q`
+   --> benchmarks/benchmark_verify_attention.py:162:50
+    |
+160 |                     else:
+161 |                         cell["timing"] = paired(
+162 |                             mx, [lambda _: stock(q, k, v, past, rows), candidate], iterations
+    |                                                  ^
+163 |                         )
+164 |                 report["cells"].append(cell)
+    |
+
+B023 Function definition does not bind loop variable `k`
+   --> benchmarks/benchmark_verify_attention.py:162:53
+    |
+160 |                     else:
+161 |                         cell["timing"] = paired(
+162 |                             mx, [lambda _: stock(q, k, v, past, rows), candidate], iterations
+    |                                                     ^
+163 |                         )
+164 |                 report["cells"].append(cell)
+    |
+
+B023 Function definition does not bind loop variable `v`
+   --> benchmarks/benchmark_verify_attention.py:162:56
+    |
+160 |                     else:
+161 |                         cell["timing"] = paired(
+162 |                             mx, [lambda _: stock(q, k, v, past, rows), candidate], iterations
+    |                                                        ^
+163 |                         )
+164 |                 report["cells"].append(cell)
+    |
+
+B023 Function definition does not bind loop variable `past`
+   --> benchmarks/benchmark_verify_attention.py:162:59
+    |
+160 |                     else:
+161 |                         cell["timing"] = paired(
+162 |                             mx, [lambda _: stock(q, k, v, past, rows), candidate], iterations
+    |                                                           ^^^^
+163 |                         )
+164 |                 report["cells"].append(cell)
+    |
+
+B023 Function definition does not bind loop variable `rows`
+   --> benchmarks/benchmark_verify_attention.py:162:65
+    |
+160 |                     else:
+161 |                         cell["timing"] = paired(
+162 |                             mx, [lambda _: stock(q, k, v, past, rows), candidate], iterations
+    |                                                                 ^^^^
+163 |                         )
+164 |                 report["cells"].append(cell)
+    |
+
+Found 11 errors (1 fixed, 10 remaining).

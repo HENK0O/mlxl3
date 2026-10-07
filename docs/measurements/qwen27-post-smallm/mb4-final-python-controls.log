@@ -1,0 +1,29 @@
+1 file reformatted, 1 file left unchanged
+I001 [*] Import block is un-sorted or un-formatted
+  --> tests/test_lmhead_mb4_benchmark.py:3:1
+   |
+ 1 |   """Exercise the reporting entry point without loading GPU weights."""
+ 2 |
+ 3 | / import copy
+ 4 | | import json
+ 5 | | import sys
+ 6 | | from pathlib import Path
+ 7 | | from types import SimpleNamespace
+ 8 | |
+ 9 | | import pytest
+10 | | import numpy as np
+   | |__________________^
+11 |
+12 |   sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "benchmarks"))
+   |
+help: Organize imports
+   |
+8  |
+9  + import numpy as np
+10 | import pytest
+   - import numpy as np
+11 |
+   |
+
+Found 1 error.
+[*] 1 fixable with the `--fix` option.

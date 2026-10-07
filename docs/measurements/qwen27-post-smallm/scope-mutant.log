@@ -1,0 +1,22 @@
+   Compiling mlxl3-native v1.4.1 (/Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm)
+    Finished `release` profile [optimized] target(s) in 33.14s
+warning: the following packages contain code that will be rejected by a future version of Rust: block v0.1.6
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 1`
+     Running unittests native/src/lib.rs (../work/post-smallm-target/release/deps/mlxl3_native-7403dac709d8357e)
+
+running 1 test
+test qwen35::profile::scopes_restore_after_error_and_panic ... 
+thread 'qwen35::profile::scopes_restore_after_error_and_panic' (4120620) panicked at native/src/qwen35/profile.rs:244:48:
+called `Result::unwrap()` on an `Err` value: nested profile scope
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+Error: profile leaked after panic
+FAILED
+
+failures:
+
+failures:
+    qwen35::profile::scopes_restore_after_error_and_panic
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 92 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`

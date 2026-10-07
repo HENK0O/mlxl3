@@ -1,0 +1,22 @@
+{
+  "command": [
+    "/Users/henko/Documents/Codex/2026-10-05/chec/work/post-smallm-target/release/deps/mlxl3_native-7403dac709d8357e",
+    "--exact",
+    "qwen35::profile::real_mtp_round_breakdown",
+    "--ignored",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "env": {
+    "MLXL3_MTP_TEST_MODEL": "/Users/henko/Library/Application Support/io.mlxl3.desktop/Models/Qwen3.8-27B-exl3-6a9ca9d0",
+    "MLXL3_MTP_TEST_HEAD": "/Users/henko/Library/Application Support/io.mlxl3.desktop/Drafts/Qwen3.8-27B-MTP-4bit",
+    "MLXL3_PROFILE_CONTEXTS": "24",
+    "MLXL3_PROFILE_WORKLOAD": "code",
+    "MLXL3_PROFILE_OUTPUT": "/Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm/docs/measurements/qwen27-post-smallm/profile-smoke.json"
+  },
+  "timeout_seconds": 180,
+  "binary_sha256": "7b35e30fb720373823d13a361a645186884b466ffdde704fbf3ab31a1732eb8c",
+  "exit_code": 0,
+  "status": "complete",
+  "elapsed_seconds": 25.20373475
+}

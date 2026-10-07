@@ -1,0 +1,9 @@
+
+running 1 test
+test qwen35::profile::real_mtp_round_breakdown ... PROFILE completed code context=24 D1, exact state/IDs/draft/counters
+PROFILE completed code context=24 D2, exact state/IDs/draft/counters
+PROFILE completed code context=24 D3, exact state/IDs/draft/counters
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 91 filtered out; finished in 24.83s
+

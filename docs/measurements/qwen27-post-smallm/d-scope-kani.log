@@ -1,0 +1,552 @@
+Kani Rust Verifier 0.68.0 (cargo plugin)
+CBMC 6.11.0
+   Compiling mlxl3-native v1.4.1 (/Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm)
+warning: trailing semicolon in macro used in expression position
+   --> native/src/contracts.rs:267:29
+    |
+267 |                     None => assert!(!(2..24).contains(&rows)),
+    |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!
+    = note: for more information, see issue #79813 <https://github.com/rust-lang/rust/issues/79813>
+    = note: `#[warn(semicolon_in_expressions_from_non_local_macros)]` (part of `#[warn(future_incompatible)]`) on by default
+    = note: this warning originates in the macro `assert` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: trailing semicolon in macro used in expression position
+   --> native/src/contracts.rs:298:17
+    |
+298 |         None => assert!(!(2..24).contains(&rows)),
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!
+    = note: for more information, see issue #79813 <https://github.com/rust-lang/rust/issues/79813>
+    = note: this warning originates in the macro `assert` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: trailing semicolon in macro used in expression position
+   --> native/src/contracts.rs:331:21
+    |
+331 |             None => assert!(!(1..=8).contains(&time)),
+    |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!
+    = note: for more information, see issue #79813 <https://github.com/rust-lang/rust/issues/79813>
+    = note: this warning originates in the macro `assert` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: trailing semicolon in macro used in expression position
+   --> native/src/qwen35/prepared.rs:188:35
+    |
+188 |         with_preparation(None, || assert!(current().is_none()));
+    |                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!
+    = note: for more information, see issue #79813 <https://github.com/rust-lang/rust/issues/79813>
+    = note: this warning originates in the macro `assert` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: trailing semicolon in macro used in expression position
+   --> native/src/qwen35/prepared.rs:190:31
+    |
+190 |         std::thread::spawn(|| assert!(current().is_none()))
+    |                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!
+    = note: for more information, see issue #79813 <https://github.com/rust-lang/rust/issues/79813>
+    = note: this warning originates in the macro `assert` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: trailing semicolon in macro used in expression position
+   --> native/src/qwen35/prepared.rs:212:39
+    |
+212 |             with_preparation(None, || assert!(current().is_none()));
+    |                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!
+    = note: for more information, see issue #79813 <https://github.com/rust-lang/rust/issues/79813>
+    = note: this warning originates in the macro `assert` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: unused variable: `index`
+    --> native/src/linear.rs:1249:18
+     |
+1249 |               for (index, (left, right)) in expected.iter().zip(&actual).enumerate() {
+     |                    ^^^^^
+1250 | /                 assert_eq!(
+1251 | |                     left.to_f16_bits()?,
+1252 | |                     right.to_f16_bits()?,
+1253 | |                     "grouped batch M={matrix_rows} output {index} differs"
+1254 | |                 );
+     | |_________________- you might have meant to use string interpolation in this string literal
+     |
+     = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+help: if this is intentional, prefix it with an underscore
+     |
+1249 |             for (_index, (left, right)) in expected.iter().zip(&actual).enumerate() {
+     |                  +
+
+warning: unused variable: `name`
+    --> native/src/qwen35.rs:2575:18
+     |
+2575 |               for (name, actual, expected) in [
+     |                    ^^^^
+...
+2581 | /                 assert_eq!(
+2582 | |                     actual.to_f16_bits()?,
+2583 | |                     expected.to_f16_bits()?,
+2584 | |                     "fused GDN {name} differs at T={time}"
+2585 | |                 );
+     | |_________________- you might have meant to use string interpolation in this string literal
+     |
+help: if this is intentional, prefix it with an underscore
+     |
+2575 |             for (_name, actual, expected) in [
+     |                  +
+
+warning: use of an unstable feature
+ --> <crate attribute>:1:12
+  |
+1 | #![feature(register_tool)]
+  |            ^^^^^^^^^^^^^
+  |
+  = note: requested on the command line with `--force-warn unstable-features`
+
+warning: Kani currently does not support concurrency. The following constructs will be treated as sequential operations:
+             - thread local (replaced by static variable) (1)
+         
+
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.63s
+warning: the following packages contain code that will be rejected by a future version of Rust: block v0.1.6, mlxl3-native v1.4.1 (/Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm)
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 4`
+Checking harness mtp::native::dynamic::scope_drop_restores_actual_policy...
+CBMC 6.11.0 (cbmc-6.11.0)
+CBMC version 6.11.0 (cbmc-6.11.0) 64-bit arm64 macos
+Reading GOTO program from file /Users/henko/Documents/Codex/2026-10-05/chec/work/post-smallm-target/kani/aarch64-apple-darwin/debug/build/mlxl3-native/36ebb19eed9ff7f4/out/mlxl3_native-36ebb19eed9ff7f4__RNvNtNtNtCsfDTyp46nutT_12mlxl3_native3mtp6native7dynamic33scope_drop_restores_actual_policy.out
+Generating GOTO Program
+Adding CPROVER library (arm64)
+Removal of function pointers and virtual functions
+Generic Property Instrumentation
+Running with 16 object bits, 48 offset bits (user-specified)
+Starting Bounded Model Checking
+Runtime Symex: 0.0430014s
+size of program expression: 2894 steps
+slicing removed 2159 assignments
+Generated 190 VCC(s), 13 remaining after simplification
+Runtime Postprocess Equation: 0.000239084s
+Passing problem to propositional reduction
+converting SSA
+Runtime Convert SSA: 0.00278542s
+Running propositional reduction
+Post-processing
+Runtime Post-process: 6.292e-06s
+Solving with CaDiCaL 3.0.0
+11846 variables, 14185 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 0.000100834s
+Runtime decision procedure: 0.0029815s
+Running propositional reduction
+Solving with CaDiCaL 3.0.0
+11847 variables, 14186 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 6.6583e-05s
+Runtime decision procedure: 0.000112541s
+Running propositional reduction
+Solving with CaDiCaL 3.0.0
+11848 variables, 14187 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 7.175e-05s
+Runtime decision procedure: 0.000115917s
+Running propositional reduction
+Solving with CaDiCaL 3.0.0
+11849 variables, 14188 clauses
+SAT checker: instance is SATISFIABLE
+Runtime Solver: 9.4625e-05s
+Runtime decision procedure: 0.000139083s
+Running propositional reduction
+Solving with CaDiCaL 3.0.0
+11850 variables, 14189 clauses
+SAT checker: instance is UNSATISFIABLE
+Runtime Solver: 1.0709e-05s
+Runtime decision procedure: 3.4833e-05s
+
+RESULTS:
+Check 1: std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::replace.safety_check.1
+	 - Status: SUCCESS
+	 - Description: "misaligned pointer to reference cast: address must be a multiple of its type's alignment"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/cell.rs:516:31 in function std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::replace
+
+Check 2: std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::replace.safety_check.2
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer invalid"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/cell.rs:516:31 in function std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::replace
+
+Check 3: <std::result::Result<&std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>, std::thread::AccessError> as std::ops::Try>::branch.unreachable.1
+	 - Status: SUCCESS
+	 - Description: "unreachable code"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/result.rs:2177:15 in function <std::result::Result<&std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>, std::thread::AccessError> as std::ops::Try>::branch
+
+Check 4: std::option::Option::<&std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::ok_or::<std::thread::AccessError>.unreachable.1
+	 - Status: SUCCESS
+	 - Description: "unreachable code"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/option.rs:1334:15 in function std::option::Option::<&std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::ok_or::<std::thread::AccessError>
+
+Check 5: std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::set::{closure#0}.unreachable.1
+	 - Status: SUCCESS
+	 - Description: "unreachable code"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/std/src/thread/local.rs:525:48 in function std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::set::{closure#0}
+
+Check 6: <std::thread::local::LocalKey<core::cell::Cell<core::option::Option<mlxl3_native::mtp::depth_policy::Policy>>>>::initialize_with::<<std::thread::local::LocalKey<core::cell::Cell<core::option::Option<mlxl3_native::mtp::depth_policy::Policy>>>>::set::{closure#0}, ()>.missing_definition.1
+	 - Status: SUCCESS
+	 - Description: "assertion"
+	 - Location: Unknown file in function <std::thread::local::LocalKey<core::cell::Cell<core::option::Option<mlxl3_native::mtp::depth_policy::Policy>>>>::initialize_with::<<std::thread::local::LocalKey<core::cell::Cell<core::option::Option<mlxl3_native::mtp::depth_policy::Policy>>>>::set::{closure#0}, ()>
+
+Check 7: std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::initialize_with::<{closure@std::thread::LocalKey<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::set::{closure#0}}, ()>.unreachable.1
+	 - Status: SUCCESS
+	 - Description: "unreachable code"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/std/src/thread/local.rs:486:19 in function std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::initialize_with::<{closure@std::thread::LocalKey<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::set::{closure#0}}, ()>
+
+Check 8: <std::result::Result<std::option::Option<mtp::depth_policy::Policy>, std::thread::AccessError> as std::ops::FromResidual<std::result::Result<std::convert::Infallible, std::thread::AccessError>>>::from_residual.unreachable.1
+	 - Status: SUCCESS
+	 - Description: "unreachable code"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/result.rs:2192:15 in function <std::result::Result<std::option::Option<mtp::depth_policy::Policy>, std::thread::AccessError> as std::ops::FromResidual<std::result::Result<std::convert::Infallible, std::thread::AccessError>>>::from_residual
+
+Check 9: std::ptr::const_ptr::<impl *const std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::as_ref::<'_>.safety_check.1
+	 - Status: SUCCESS
+	 - Description: "misaligned pointer to reference cast: address must be a multiple of its type's alignment"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/ptr/const_ptr.rs:270:57 in function std::ptr::const_ptr::<impl *const std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::as_ref::<'_>
+
+Check 10: std::ptr::const_ptr::<impl *const std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::as_ref::<'_>.safety_check.2
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer invalid"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/ptr/const_ptr.rs:270:57 in function std::ptr::const_ptr::<impl *const std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::as_ref::<'_>
+
+Check 11: std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::with::<for<'a> fn(&'a std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>) -> std::option::Option<mtp::depth_policy::Policy> {std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get}, std::option::Option<mtp::depth_policy::Policy>>.unreachable.1
+	 - Status: SUCCESS
+	 - Description: "unreachable code"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/std/src/thread/local.rs:428:15 in function std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::with::<for<'a> fn(&'a std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>) -> std::option::Option<mtp::depth_policy::Policy> {std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get}, std::option::Option<mtp::depth_policy::Policy>>
+
+Check 12: mtp::native::dynamic::scope_drop_restores_actual_policy.assertion.1
+	 - Status: SUCCESS
+	 - Description: "assertion failed: POLICY.get().is_none()"
+	 - Location: native/src/mtp/native/dynamic.rs:119:5 in function mtp::native::dynamic::scope_drop_restores_actual_policy
+
+Check 13: mtp::native::dynamic::scope_drop_restores_actual_policy.assertion.2
+	 - Status: SUCCESS
+	 - Description: "assertion failed: POLICY.get().is_some()"
+	 - Location: native/src/mtp/native/dynamic.rs:124:5 in function mtp::native::dynamic::scope_drop_restores_actual_policy
+
+Check 14: mtp::native::dynamic::scope_drop_restores_actual_policy.assertion.3
+	 - Status: SUCCESS
+	 - Description: "assertion failed: POLICY.get().is_none()"
+	 - Location: native/src/mtp/native/dynamic.rs:126:5 in function mtp::native::dynamic::scope_drop_restores_actual_policy
+
+Check 15: mtp::native::dynamic::scope_drop_restores_actual_policy.cover.1
+	 - Status: SATISFIED
+	 - Description: "cover condition: POLICY.get().is_none()"
+	 - Location: native/src/mtp/native/dynamic.rs:127:5 in function mtp::native::dynamic::scope_drop_restores_actual_policy
+
+Check 16: <std::thread::local::LocalKey<core::cell::Cell<core::option::Option<mlxl3_native::mtp::depth_policy::Policy>>>>::try_with::<<core::cell::Cell<core::option::Option<mlxl3_native::mtp::depth_policy::Policy>>>::get, core::option::Option<mlxl3_native::mtp::depth_policy::Policy>>.missing_definition.1
+	 - Status: SUCCESS
+	 - Description: "assertion"
+	 - Location: Unknown file in function <std::thread::local::LocalKey<core::cell::Cell<core::option::Option<mlxl3_native::mtp::depth_policy::Policy>>>>::try_with::<<core::cell::Cell<core::option::Option<mlxl3_native::mtp::depth_policy::Policy>>>::get, core::option::Option<mlxl3_native::mtp::depth_policy::Policy>>
+
+Check 17: std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::try_with::<for<'a> fn(&'a std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>) -> std::option::Option<mtp::depth_policy::Policy> {std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get}, std::option::Option<mtp::depth_policy::Policy>>.unreachable.1
+	 - Status: SUCCESS
+	 - Description: "unreachable code"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/std/src/thread/local.rs:463:37 in function std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::try_with::<for<'a> fn(&'a std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>) -> std::option::Option<mtp::depth_policy::Policy> {std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get}, std::option::Option<mtp::depth_policy::Policy>>
+
+Check 18: std::thread::local::panic_access_error.assertion.1
+	 - Status: SUCCESS
+	 - Description: "This is a placeholder message; Kani doesn't support message formatted at runtime"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/std/src/thread/local.rs:386:5 in function std::thread::local::panic_access_error
+
+Check 19: std::option::Option::<mtp::depth_policy::Policy>::is_some.unreachable.1
+	 - Status: SUCCESS
+	 - Description: "unreachable code"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/option.rs:633:5 in function std::option::Option::<mtp::depth_policy::Policy>::is_some
+
+Check 20: std::option::Option::<&std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::ok_or::<std::thread::AccessError>.pointer_dereference.1
+	 - Status: SUCCESS
+	 - Description: "dereference failure: dead object"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/option.rs:1334:15 in function std::option::Option::<&std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::ok_or::<std::thread::AccessError>
+
+Check 21: std::option::Option::<&std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::ok_or::<std::thread::AccessError>.pointer_dereference.2
+	 - Status: SUCCESS
+	 - Description: "dereference failure: dead object"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/option.rs:1336:21 in function std::option::Option::<&std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::ok_or::<std::thread::AccessError>
+
+Check 22: std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::initialize_with::<{closure@std::thread::LocalKey<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::set::{closure#0}}, ()>.pointer_dereference.1
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer NULL"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/std/src/thread/local.rs:486:19 in function std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::initialize_with::<{closure@std::thread::LocalKey<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::set::{closure#0}}, ()>
+
+Check 23: std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::initialize_with::<{closure@std::thread::LocalKey<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::set::{closure#0}}, ()>.pointer_dereference.2
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer invalid"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/std/src/thread/local.rs:486:19 in function std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::initialize_with::<{closure@std::thread::LocalKey<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::set::{closure#0}}, ()>
+
+Check 24: std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::initialize_with::<{closure@std::thread::LocalKey<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::set::{closure#0}}, ()>.pointer_dereference.3
+	 - Status: SUCCESS
+	 - Description: "dereference failure: deallocated dynamic object"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/std/src/thread/local.rs:486:19 in function std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::initialize_with::<{closure@std::thread::LocalKey<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::set::{closure#0}}, ()>
+
+Check 25: std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::initialize_with::<{closure@std::thread::LocalKey<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::set::{closure#0}}, ()>.pointer_dereference.4
+	 - Status: SUCCESS
+	 - Description: "dereference failure: dead object"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/std/src/thread/local.rs:486:19 in function std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::initialize_with::<{closure@std::thread::LocalKey<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::set::{closure#0}}, ()>
+
+Check 26: std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::initialize_with::<{closure@std::thread::LocalKey<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::set::{closure#0}}, ()>.pointer_dereference.5
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer outside object bounds"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/std/src/thread/local.rs:486:19 in function std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::initialize_with::<{closure@std::thread::LocalKey<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::set::{closure#0}}, ()>
+
+Check 27: std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::initialize_with::<{closure@std::thread::LocalKey<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::set::{closure#0}}, ()>.pointer_dereference.6
+	 - Status: SUCCESS
+	 - Description: "dereference failure: invalid integer address"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/std/src/thread/local.rs:486:19 in function std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::initialize_with::<{closure@std::thread::LocalKey<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::set::{closure#0}}, ()>
+
+Check 28: pointer_dereference.1
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer NULL"
+
+Check 29: pointer_dereference.2
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer invalid"
+
+Check 30: pointer_dereference.3
+	 - Status: SUCCESS
+	 - Description: "dereference failure: deallocated dynamic object"
+
+Check 31: pointer_dereference.4
+	 - Status: SUCCESS
+	 - Description: "dereference failure: dead object"
+
+Check 32: pointer_dereference.5
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer outside object bounds"
+
+Check 33: pointer_dereference.6
+	 - Status: SUCCESS
+	 - Description: "dereference failure: invalid integer address"
+
+Check 34: std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::initialize_with::<{closure@std::thread::LocalKey<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::set::{closure#0}}, ()>.pointer_dereference.7
+	 - Status: SUCCESS
+	 - Description: "dereference failure: dead object"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/std/src/thread/local.rs:486:19 in function std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::initialize_with::<{closure@std::thread::LocalKey<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::set::{closure#0}}, ()>
+
+Check 35: std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::with::<for<'a> fn(&'a std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>) -> std::option::Option<mtp::depth_policy::Policy> {std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get}, std::option::Option<mtp::depth_policy::Policy>>.pointer_dereference.1
+	 - Status: SUCCESS
+	 - Description: "dereference failure: dead object"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/std/src/thread/local.rs:428:15 in function std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::with::<for<'a> fn(&'a std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>) -> std::option::Option<mtp::depth_policy::Policy> {std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get}, std::option::Option<mtp::depth_policy::Policy>>
+
+Check 36: std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::try_with::<for<'a> fn(&'a std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>) -> std::option::Option<mtp::depth_policy::Policy> {std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get}, std::option::Option<mtp::depth_policy::Policy>>.pointer_dereference.1
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer NULL"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/std/src/thread/local.rs:463:37 in function std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::try_with::<for<'a> fn(&'a std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>) -> std::option::Option<mtp::depth_policy::Policy> {std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get}, std::option::Option<mtp::depth_policy::Policy>>
+
+Check 37: std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::try_with::<for<'a> fn(&'a std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>) -> std::option::Option<mtp::depth_policy::Policy> {std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get}, std::option::Option<mtp::depth_policy::Policy>>.pointer_dereference.2
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer invalid"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/std/src/thread/local.rs:463:37 in function std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::try_with::<for<'a> fn(&'a std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>) -> std::option::Option<mtp::depth_policy::Policy> {std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get}, std::option::Option<mtp::depth_policy::Policy>>
+
+Check 38: std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::try_with::<for<'a> fn(&'a std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>) -> std::option::Option<mtp::depth_policy::Policy> {std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get}, std::option::Option<mtp::depth_policy::Policy>>.pointer_dereference.3
+	 - Status: SUCCESS
+	 - Description: "dereference failure: deallocated dynamic object"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/std/src/thread/local.rs:463:37 in function std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::try_with::<for<'a> fn(&'a std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>) -> std::option::Option<mtp::depth_policy::Policy> {std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get}, std::option::Option<mtp::depth_policy::Policy>>
+
+Check 39: std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::try_with::<for<'a> fn(&'a std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>) -> std::option::Option<mtp::depth_policy::Policy> {std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get}, std::option::Option<mtp::depth_policy::Policy>>.pointer_dereference.4
+	 - Status: SUCCESS
+	 - Description: "dereference failure: dead object"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/std/src/thread/local.rs:463:37 in function std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::try_with::<for<'a> fn(&'a std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>) -> std::option::Option<mtp::depth_policy::Policy> {std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get}, std::option::Option<mtp::depth_policy::Policy>>
+
+Check 40: std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::try_with::<for<'a> fn(&'a std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>) -> std::option::Option<mtp::depth_policy::Policy> {std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get}, std::option::Option<mtp::depth_policy::Policy>>.pointer_dereference.5
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer outside object bounds"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/std/src/thread/local.rs:463:37 in function std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::try_with::<for<'a> fn(&'a std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>) -> std::option::Option<mtp::depth_policy::Policy> {std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get}, std::option::Option<mtp::depth_policy::Policy>>
+
+Check 41: std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::try_with::<for<'a> fn(&'a std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>) -> std::option::Option<mtp::depth_policy::Policy> {std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get}, std::option::Option<mtp::depth_policy::Policy>>.pointer_dereference.6
+	 - Status: SUCCESS
+	 - Description: "dereference failure: invalid integer address"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/std/src/thread/local.rs:463:37 in function std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::try_with::<for<'a> fn(&'a std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>) -> std::option::Option<mtp::depth_policy::Policy> {std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get}, std::option::Option<mtp::depth_policy::Policy>>
+
+Check 42: std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::try_with::<for<'a> fn(&'a std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>) -> std::option::Option<mtp::depth_policy::Policy> {std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get}, std::option::Option<mtp::depth_policy::Policy>>.pointer_dereference.7
+	 - Status: SUCCESS
+	 - Description: "dereference failure: dead object"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/std/src/thread/local.rs:463:50 in function std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::try_with::<for<'a> fn(&'a std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>) -> std::option::Option<mtp::depth_policy::Policy> {std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get}, std::option::Option<mtp::depth_policy::Policy>>
+
+Check 43: pointer_dereference.7
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer NULL"
+
+Check 44: pointer_dereference.8
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer invalid"
+
+Check 45: pointer_dereference.9
+	 - Status: SUCCESS
+	 - Description: "dereference failure: deallocated dynamic object"
+
+Check 46: pointer_dereference.10
+	 - Status: SUCCESS
+	 - Description: "dereference failure: dead object"
+
+Check 47: pointer_dereference.11
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer outside object bounds"
+
+Check 48: pointer_dereference.12
+	 - Status: SUCCESS
+	 - Description: "dereference failure: invalid integer address"
+
+Check 49: std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::try_with::<for<'a> fn(&'a std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>) -> std::option::Option<mtp::depth_policy::Policy> {std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get}, std::option::Option<mtp::depth_policy::Policy>>.pointer_dereference.8
+	 - Status: SUCCESS
+	 - Description: "dereference failure: dead object"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/std/src/thread/local.rs:463:37 in function std::thread::LocalKey::<std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::try_with::<for<'a> fn(&'a std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>) -> std::option::Option<mtp::depth_policy::Policy> {std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get}, std::option::Option<mtp::depth_policy::Policy>>
+
+Check 50: std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>.pointer_dereference.1
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer NULL"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/mem/mod.rs:975:22 in function std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>
+
+Check 51: std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>.pointer_dereference.2
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer invalid"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/mem/mod.rs:975:22 in function std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>
+
+Check 52: std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>.pointer_dereference.3
+	 - Status: SUCCESS
+	 - Description: "dereference failure: deallocated dynamic object"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/mem/mod.rs:975:22 in function std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>
+
+Check 53: std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>.pointer_dereference.4
+	 - Status: SUCCESS
+	 - Description: "dereference failure: dead object"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/mem/mod.rs:975:22 in function std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>
+
+Check 54: std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>.pointer_dereference.5
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer outside object bounds"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/mem/mod.rs:975:22 in function std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>
+
+Check 55: std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>.pointer_dereference.6
+	 - Status: SUCCESS
+	 - Description: "dereference failure: invalid integer address"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/mem/mod.rs:975:22 in function std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>
+
+Check 56: std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>.pointer_dereference.7
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer NULL"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/mem/mod.rs:976:49 in function std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>
+
+Check 57: std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>.pointer_dereference.8
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer invalid"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/mem/mod.rs:976:49 in function std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>
+
+Check 58: std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>.pointer_dereference.9
+	 - Status: SUCCESS
+	 - Description: "dereference failure: deallocated dynamic object"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/mem/mod.rs:976:49 in function std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>
+
+Check 59: std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>.pointer_dereference.10
+	 - Status: SUCCESS
+	 - Description: "dereference failure: dead object"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/mem/mod.rs:976:49 in function std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>
+
+Check 60: std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>.pointer_dereference.11
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer outside object bounds"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/mem/mod.rs:976:49 in function std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>
+
+Check 61: std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>.pointer_dereference.12
+	 - Status: SUCCESS
+	 - Description: "dereference failure: invalid integer address"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/mem/mod.rs:976:49 in function std::mem::replace::<std::option::Option<mtp::depth_policy::Policy>>
+
+Check 62: std::option::Option::<mtp::depth_policy::Policy>::is_some.pointer_dereference.1
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer NULL"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/option.rs:634:18 in function std::option::Option::<mtp::depth_policy::Policy>::is_some
+
+Check 63: std::option::Option::<mtp::depth_policy::Policy>::is_some.pointer_dereference.2
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer invalid"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/option.rs:634:18 in function std::option::Option::<mtp::depth_policy::Policy>::is_some
+
+Check 64: std::option::Option::<mtp::depth_policy::Policy>::is_some.pointer_dereference.3
+	 - Status: SUCCESS
+	 - Description: "dereference failure: deallocated dynamic object"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/option.rs:634:18 in function std::option::Option::<mtp::depth_policy::Policy>::is_some
+
+Check 65: std::option::Option::<mtp::depth_policy::Policy>::is_some.pointer_dereference.4
+	 - Status: SUCCESS
+	 - Description: "dereference failure: dead object"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/option.rs:634:18 in function std::option::Option::<mtp::depth_policy::Policy>::is_some
+
+Check 66: std::option::Option::<mtp::depth_policy::Policy>::is_some.pointer_dereference.5
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer outside object bounds"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/option.rs:634:18 in function std::option::Option::<mtp::depth_policy::Policy>::is_some
+
+Check 67: std::option::Option::<mtp::depth_policy::Policy>::is_some.pointer_dereference.6
+	 - Status: SUCCESS
+	 - Description: "dereference failure: invalid integer address"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/option.rs:634:18 in function std::option::Option::<mtp::depth_policy::Policy>::is_some
+
+Check 68: std::ptr::const_ptr::<impl *const std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::as_ref::<'_>.pointer_dereference.1
+	 - Status: SUCCESS
+	 - Description: "dereference failure: dead object"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/ptr/const_ptr.rs:270:29 in function std::ptr::const_ptr::<impl *const std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>>::as_ref::<'_>
+
+Check 69: std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get.pointer_dereference.1
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer NULL"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/cell.rs:558:18 in function std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get
+
+Check 70: std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get.pointer_dereference.2
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer invalid"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/cell.rs:558:18 in function std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get
+
+Check 71: std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get.pointer_dereference.3
+	 - Status: SUCCESS
+	 - Description: "dereference failure: deallocated dynamic object"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/cell.rs:558:18 in function std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get
+
+Check 72: std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get.pointer_dereference.4
+	 - Status: SUCCESS
+	 - Description: "dereference failure: dead object"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/cell.rs:558:18 in function std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get
+
+Check 73: std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get.pointer_dereference.5
+	 - Status: SUCCESS
+	 - Description: "dereference failure: pointer outside object bounds"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/cell.rs:558:18 in function std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get
+
+Check 74: std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get.pointer_dereference.6
+	 - Status: SUCCESS
+	 - Description: "dereference failure: invalid integer address"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/cell.rs:558:18 in function std::cell::Cell::<std::option::Option<mtp::depth_policy::Policy>>::get
+
+Check 75: <std::result::Result<&std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>, std::thread::AccessError> as std::ops::Try>::branch.pointer_dereference.1
+	 - Status: SUCCESS
+	 - Description: "dereference failure: dead object"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/result.rs:2177:15 in function <std::result::Result<&std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>, std::thread::AccessError> as std::ops::Try>::branch
+
+Check 76: <std::result::Result<&std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>, std::thread::AccessError> as std::ops::Try>::branch.pointer_dereference.2
+	 - Status: SUCCESS
+	 - Description: "dereference failure: dead object"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/result.rs:2179:23 in function <std::result::Result<&std::cell::Cell<std::option::Option<mtp::depth_policy::Policy>>, std::thread::AccessError> as std::ops::Try>::branch
+
+Check 77: <std::result::Result<std::option::Option<mtp::depth_policy::Policy>, std::thread::AccessError> as std::ops::FromResidual<std::result::Result<std::convert::Infallible, std::thread::AccessError>>>::from_residual.pointer_dereference.1
+	 - Status: SUCCESS
+	 - Description: "dereference failure: dead object"
+	 - Location: ../../../../../../runner/.rustup/toolchains/nightly-2026-08-21-aarch64-apple-darwin/lib/rustlib/src/rust/library/core/src/result.rs:2193:23 in function <std::result::Result<std::option::Option<mtp::depth_policy::Policy>, std::thread::AccessError> as std::ops::FromResidual<std::result::Result<std::convert::Infallible, std::thread::AccessError>>>::from_residual
+
+
+SUMMARY:
+ ** 0 of 76 failed
+
+ ** 1 of 1 cover properties satisfied
+
+
+VERIFICATION:- SUCCESSFUL
+Verification Time: 0.08801255s
+
+Manual Harness Summary:
+Complete - 1 successfully verified harnesses, 0 failures, 1 total.

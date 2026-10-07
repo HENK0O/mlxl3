@@ -1,0 +1,187 @@
+{
+  "status": "complete",
+  "parity": true,
+  "boundary": "one synthetic FP16 attention/cache component, old snapshots live; not native cache or model throughput",
+  "cells": [
+    {
+      "past": 8192,
+      "m": 2,
+      "medians_ms": [
+        1.8608125,
+        1.758979
+      ],
+      "paired_gain_pct": -0.3420367418298653,
+      "memory_before": {
+        "active": 71346180,
+        "cache": 0,
+        "peak": 161624068
+      },
+      "memory_after": {
+        "active": 142747652,
+        "cache": 3244048,
+        "peak": 161624068
+      },
+      "control_spread_pct": 58.61977852672125
+    },
+    {
+      "past": 8192,
+      "m": 3,
+      "medians_ms": [
+        2.2128750000000004,
+        2.4122085
+      ],
+      "paired_gain_pct": -10.885308320442551,
+      "memory_before": {
+        "active": 71366660,
+        "cache": 0,
+        "peak": 161677316
+      },
+      "memory_after": {
+        "active": 142800900,
+        "cache": 4866064,
+        "peak": 161677316
+      },
+      "control_spread_pct": 65.83042235630361
+    },
+    {
+      "past": 8192,
+      "m": 4,
+      "medians_ms": [
+        2.3240415,
+        2.3614170000000003
+      ],
+      "paired_gain_pct": -0.33258622718407294,
+      "memory_before": {
+        "active": 71370756,
+        "cache": 0,
+        "peak": 161681412
+      },
+      "memory_after": {
+        "active": 142804996,
+        "cache": 6488080,
+        "peak": 161681412
+      },
+      "control_spread_pct": 40.517847762973425
+    },
+    {
+      "past": 16384,
+      "m": 2,
+      "medians_ms": [
+        2.6402915,
+        2.6423129999999997
+      ],
+      "paired_gain_pct": -2.0517572472971093,
+      "memory_before": {
+        "active": 138455044,
+        "cache": 0,
+        "peak": 312619012
+      },
+      "memory_after": {
+        "active": 276965380,
+        "cache": 3244048,
+        "peak": 312619012
+      },
+      "control_spread_pct": 33.60701207024053
+    },
+    {
+      "past": 16384,
+      "m": 3,
+      "medians_ms": [
+        3.1731875,
+        3.270104
+      ],
+      "paired_gain_pct": -2.7361232847408434,
+      "memory_before": {
+        "active": 138475524,
+        "cache": 0,
+        "peak": 312672260
+      },
+      "memory_after": {
+        "active": 277018628,
+        "cache": 4866064,
+        "peak": 312672260
+      },
+      "control_spread_pct": 27.45610962886009
+    },
+    {
+      "past": 16384,
+      "m": 4,
+      "medians_ms": [
+        3.6861045,
+        3.9435000000000002
+      ],
+      "paired_gain_pct": -5.166058737333612,
+      "memory_before": {
+        "active": 138479620,
+        "cache": 0,
+        "peak": 312676356
+      },
+      "memory_after": {
+        "active": 277022724,
+        "cache": 6488080,
+        "peak": 312676356
+      },
+      "control_spread_pct": 26.703916069318232
+    },
+    {
+      "past": 32768,
+      "m": 2,
+      "medians_ms": [
+        5.6888965,
+        5.703291999999999
+      ],
+      "paired_gain_pct": 0.8399687361481778,
+      "memory_before": {
+        "active": 272672772,
+        "cache": 0,
+        "peak": 614608900
+      },
+      "memory_after": {
+        "active": 545400836,
+        "cache": 3244048,
+        "peak": 614608900
+      },
+      "control_spread_pct": 10.409277840967057
+    },
+    {
+      "past": 32768,
+      "m": 3,
+      "medians_ms": [
+        7.10025,
+        6.9771045
+      ],
+      "paired_gain_pct": 0.841463686796462,
+      "memory_before": {
+        "active": 272693252,
+        "cache": 0,
+        "peak": 614662148
+      },
+      "memory_after": {
+        "active": 545454084,
+        "cache": 4866064,
+        "peak": 614662148
+      },
+      "control_spread_pct": 22.681038047573978
+    },
+    {
+      "past": 32768,
+      "m": 4,
+      "medians_ms": [
+        8.186812,
+        8.422208
+      ],
+      "paired_gain_pct": -3.236926821930103,
+      "memory_before": {
+        "active": 272697348,
+        "cache": 0,
+        "peak": 614666244
+      },
+      "memory_after": {
+        "active": 545458180,
+        "cache": 6488080,
+        "peak": 614666244
+      },
+      "control_spread_pct": 6.136682623189094
+    }
+  ]
+}

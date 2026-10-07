@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "<stdin>", line 11, in <module>
+  File "/Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm/benchmarks/benchmark_smallm.py", line 60, in load
+    path, offset, info = self.tensors[name]
+                         ~~~~~~~~~~~~^^^^^^
+KeyError: 'model.language_model.layers.0.self_attn.q_proj.suh'

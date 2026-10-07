@@ -1,0 +1,29 @@
+   Compiling mlxl3-native v1.4.1 (/Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm)
+error: unused `std::result::Result` that must be used
+   --> native/src/qwen35/prepared.rs:376:21
+    |
+376 |                     synchronize();
+    |                     ^^^^^^^^^^^^^
+    |
+    = note: this `Result` may be an `Err` variant, which should be handled
+    = note: `-D unused-must-use` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(unused_must_use)]`
+help: use `let _ = ...` to ignore the resulting value
+    |
+376 |                     let _ = synchronize();
+    |                     +++++++
+
+error: unused `std::result::Result` that must be used
+   --> native/src/qwen35/prepared.rs:385:21
+    |
+385 |                     synchronize();
+    |                     ^^^^^^^^^^^^^
+    |
+    = note: this `Result` may be an `Err` variant, which should be handled
+help: use `let _ = ...` to ignore the resulting value
+    |
+385 |                     let _ = synchronize();
+    |                     +++++++
+
+error: could not compile `mlxl3-native` (lib test) due to 2 previous errors
+warning: build failed, waiting for other jobs to finish...

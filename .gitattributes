@@ -11,3 +11,8 @@ docs/measurements/qwen27-smallm/*.stderr linguist-generated=true
 docs/measurements/qwen27-smallm/mb3-prototype.patch -whitespace
 docs/measurements/pr27-*/*.json linguist-generated=true
 docs/measurements/pr27-*/*.log linguist-generated=true -whitespace
+
+docs/measurements/qwen27-post-smallm/*.json linguist-generated=true
+docs/measurements/qwen27-post-smallm/*.jsonl linguist-generated=true
+docs/measurements/qwen27-post-smallm/*.log linguist-generated=true -whitespace
+docs/measurements/qwen27-post-smallm/*.patch -whitespace

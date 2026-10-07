@@ -1,0 +1,414 @@
+//! A1 prototype. Only built in tests; the shipped verifier keeps its stock path.
+use super::*;
+use std::cell::Cell;
+
+#[derive(Clone, Copy, Debug)]
+pub(super) enum Preparation {
+    BatchAll,
+    ScalarRope,
+    ScalarNormRope,
+}
+
+thread_local! {
+    static PREPARATION: Cell<Option<Preparation>> = const { Cell::new(None) };
+}
+
+pub(super) fn current() -> Option<Preparation> {
+    PREPARATION.get()
+}
+
+pub(super) fn with_preparation<T>(mode: Option<Preparation>, f: impl FnOnce() -> T) -> T {
+    struct Restore(Option<Preparation>);
+    impl Drop for Restore {
+        fn drop(&mut self) {
+            PREPARATION.set(self.0);
+        }
+    }
+    let _restore = Restore(PREPARATION.replace(mode));
+    f()
+}
+
+impl Attention {
+    pub(super) fn forward_prepared(&mut self, x: &Array, mode: Preparation) -> Result<Array> {
+        let time = x.shape()[1]; // Validated by the production caller.
+        let base = self.keys.as_ref().map_or(0, |keys| keys.shape()[2]);
+        ensure!(
+            base >= 0 && base.checked_add(time).is_some(),
+            "KV offset overflow"
+        );
+        let qkv = self.qkv.forward(x)?;
+        let q_gate = qkv[0].reshape(&[1, time, self.heads, self.head_dim * 2])?;
+        let q_raw = q_gate.slice(3, 0, self.head_dim)?;
+        let k_raw = qkv[1].reshape(&[1, time, self.kv_heads, self.head_dim])?;
+        let gate = q_gate
+            .slice(3, self.head_dim, self.head_dim * 2)?
+            .reshape(&[1, time, self.heads * self.head_dim])?;
+        let (q, k) = if matches!(mode, Preparation::ScalarNormRope) {
+            let mut qs = Vec::new();
+            let mut ks = Vec::new();
+            for row in 0..time {
+                qs.push(
+                    q_raw
+                        .slice(1, row, row + 1)?
+                        .rms_norm(&self.q_norm, self.eps)?,
+                );
+                ks.push(
+                    k_raw
+                        .slice(1, row, row + 1)?
+                        .rms_norm(&self.k_norm, self.eps)?,
+                );
+            }
+            (
+                Array::concatenate(&qs.iter().collect::<Vec<_>>(), 1)?,
+                Array::concatenate(&ks.iter().collect::<Vec<_>>(), 1)?,
+            )
+        } else {
+            (
+                q_raw.rms_norm(&self.q_norm, self.eps)?,
+                k_raw.rms_norm(&self.k_norm, self.eps)?,
+            )
+        };
+        let q = q.transpose(&[0, 2, 1, 3])?;
+        let k = k.transpose(&[0, 2, 1, 3])?;
+        let (q, k) = if matches!(mode, Preparation::BatchAll) {
+            (
+                q.rope(self.rope_dims, self.theta, base)?,
+                k.rope(self.rope_dims, self.theta, base)?,
+            )
+        } else {
+            let mut qs = Vec::new();
+            let mut ks = Vec::new();
+            for row in 0..time {
+                qs.push(
+                    q.slice(2, row, row + 1)?
+                        .rope(self.rope_dims, self.theta, base + row)?,
+                );
+                ks.push(
+                    k.slice(2, row, row + 1)?
+                        .rope(self.rope_dims, self.theta, base + row)?,
+                );
+            }
+            (
+                Array::concatenate(&qs.iter().collect::<Vec<_>>(), 2)?,
+                Array::concatenate(&ks.iter().collect::<Vec<_>>(), 2)?,
+            )
+        };
+        let v = qkv[2]
+            .reshape(&[1, time, self.kv_heads, self.head_dim])?
+            .transpose(&[0, 2, 1, 3])?;
+        let keys = match &self.keys {
+            Some(previous) => Array::concatenate(&[previous, &k], 2)?,
+            None => k,
+        };
+        let values = match &self.values {
+            Some(previous) => Array::concatenate(&[previous, &v], 2)?,
+            None => v,
+        };
+        let mut attended = Vec::with_capacity(time as usize);
+        for row in 0..time {
+            let end = base + row + 1;
+            let output = Array::sdpa(
+                &q.slice(2, row, row + 1)?,
+                &keys.slice(2, 0, end)?,
+                &values.slice(2, 0, end)?,
+                (self.head_dim as f32).powf(-0.5),
+                false,
+            )?
+            .transpose(&[0, 2, 1, 3])?
+            .reshape(&[1, 1, self.heads * self.head_dim])?
+            .mul(&gate.slice(1, row, row + 1)?.sigmoid()?)?;
+            attended.push(output);
+        }
+        let output = self.output.forward(&Array::concatenate(
+            &attended.iter().collect::<Vec<_>>(),
+            1,
+        )?)?;
+        self.keys = Some(keys);
+        self.values = Some(values);
+        Ok(output)
+    }
+}
+
+#[test]
+fn preparation_scope_restores_nested_and_panicking_overrides() {
+    assert!(current().is_none());
+    with_preparation(Some(Preparation::BatchAll), || {
+        assert!(matches!(current(), Some(Preparation::BatchAll)));
+        with_preparation(None, || assert!(current().is_none()));
+        assert!(matches!(current(), Some(Preparation::BatchAll)));
+        std::thread::spawn(|| assert!(current().is_none()))
+            .join()
+            .unwrap();
+    });
+    let _ = std::panic::catch_unwind(|| {
+        with_preparation(Some(Preparation::ScalarRope), || panic!("scope test"));
+    });
+    assert!(current().is_none());
+}
+
+#[cfg(kani)]
+#[kani::proof]
+fn preparation_scope_restores_real_override() {
+    let batch: bool = kani::any();
+    with_preparation(
+        Some(if batch {
+            Preparation::BatchAll
+        } else {
+            Preparation::ScalarNormRope
+        }),
+        || {
+            assert!(current().is_some());
+            with_preparation(None, || assert!(current().is_none()));
+            assert!(current().is_some());
+        },
+    );
+    assert!(current().is_none());
+    kani::cover!(batch);
+    kani::cover!(!batch);
+}
+
+fn fixture(shape: &[i32], seed: u32) -> Result<Array> {
+    let count: usize = shape.iter().map(|&n| n as usize).product();
+    let bits = (0..count)
+        .map(|i| {
+            let word = (i as u32).wrapping_mul(1_664_525).wrapping_add(seed);
+            f16::from_f32(((word >> 8) % 1021) as f32 / 1021. - 0.5).to_bits()
+        })
+        .collect::<Vec<_>>();
+    Array::from_f16_bits(&bits, shape)
+}
+
+fn checked_bytes(array: &Array) -> Result<Vec<u8>> {
+    let bytes = array.to_bytes()?;
+    ensure!(
+        array.dtype() == Dtype::Float16 && !bytes.is_empty(),
+        "empty/non-FP16 A1 output"
+    );
+    ensure!(
+        bytes
+            .as_chunks::<2>()
+            .0
+            .iter()
+            .all(|b| f16::from_bits(u16::from_ne_bytes([b[0], b[1]])).is_finite()),
+        "non-finite A1 output"
+    );
+    Ok(bytes)
+}
+
+#[test]
+#[ignore = "requires local Qwen checkpoint and physical Apple GPU"]
+fn prepared_attention_exact_screen() -> Result<()> {
+    let output = std::env::var("MLXL3_A1_REPORT")?;
+    let mut file = std::fs::OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .open(output)?;
+    let checkpoint =
+        crate::checkpoint::inspect(Path::new(&std::env::var("MLXL3_MTP_TEST_MODEL")?))?;
+    let root: RootConfig =
+        serde_json::from_reader(File::open(checkpoint.path.join("config.json"))?)?;
+    let config = root.text_config;
+    let layer = config
+        .layer_types
+        .iter()
+        .position(|kind| kind == "full_attention")
+        .context("no attention layer")?;
+    let mut attention = Attention::load(
+        &checkpoint,
+        &format!("model.language_model.layers.{layer}.self_attn"),
+        config.hidden_size,
+        config.num_attention_heads,
+        config.num_key_value_heads,
+        config.head_dim,
+        (config.head_dim as f32 * config.partial_rotary_factor) as i32,
+        config.rope_parameters.rope_theta,
+        config.rms_norm_eps,
+    )?;
+    let mut cells = Vec::new();
+    for past in [0, 1, 23, 257, 4096, 16384] {
+        let initial = if past == 0 {
+            None
+        } else {
+            Some((
+                fixture(&[1, attention.kv_heads, past, attention.head_dim], 47)?,
+                fixture(&[1, attention.kv_heads, past, attention.head_dim], 83)?,
+            ))
+        };
+        for time in 1..=8 {
+            let x = fixture(&[1, time, config.hidden_size], 101 + time as u32)?;
+            let restore = |attention: &mut Attention| -> Result<()> {
+                attention.keys = initial.as_ref().map(|(k, _)| k.try_clone()).transpose()?;
+                attention.values = initial.as_ref().map(|(_, v)| v.try_clone()).transpose()?;
+                attention.verification_base = None;
+                Ok(())
+            };
+            restore(&mut attention)?;
+            let expected =
+                with_preparation(None, || attention.forward_verification_impl(&x, true))?;
+            let bytes = checked_bytes(&expected)?;
+            let expected_keys = checked_bytes(attention.keys.as_ref().unwrap())?;
+            let expected_values = checked_bytes(attention.values.as_ref().unwrap())?;
+            let full_keys = attention.keys.as_ref().unwrap().try_clone()?;
+            let full_values = attention.values.as_ref().unwrap().try_clone()?;
+            for mode in [
+                Preparation::BatchAll,
+                Preparation::ScalarRope,
+                Preparation::ScalarNormRope,
+            ] {
+                restore(&mut attention)?;
+                let actual =
+                    with_preparation(Some(mode), || attention.forward_verification_impl(&x, true))?;
+                let output_exact =
+                    actual.shape() == expected.shape() && checked_bytes(&actual)? == bytes;
+                let keys_exact = checked_bytes(attention.keys.as_ref().unwrap())? == expected_keys;
+                let values_exact =
+                    checked_bytes(attention.values.as_ref().unwrap())? == expected_values;
+                let mut commits = true;
+                let candidate_keys = attention.keys.as_ref().unwrap().try_clone()?;
+                let candidate_values = attention.values.as_ref().unwrap().try_clone()?;
+                for retained in 1..=time {
+                    attention.keys = Some(candidate_keys.try_clone()?);
+                    attention.values = Some(candidate_values.try_clone()?);
+                    attention.verification_base = Some(past);
+                    attention.commit_verification_prefix(retained, time)?;
+                    commits &= checked_bytes(attention.keys.as_ref().unwrap())?
+                        == checked_bytes(&full_keys.slice(2, 0, past + retained)?)?;
+                    commits &= checked_bytes(attention.values.as_ref().unwrap())?
+                        == checked_bytes(&full_values.slice(2, 0, past + retained)?)?;
+                }
+                cells.push(serde_json::json!({"past":past,"m":time,"mode":format!("{mode:?}"),"output_exact":output_exact,"keys_exact":keys_exact,"values_exact":values_exact,"all_commits_exact":commits}));
+            }
+            println!("A1 past={past} M={time}: screened three preparations");
+        }
+    }
+    let report = serde_json::json!({"status":"complete","cells":cells,"boundary":"real attention weights, deterministic FP16 inputs; not full-model logits or throughput"});
+    serde_json::to_writer_pretty(&mut file, &report)?;
+    for mode in ["BatchAll", "ScalarRope", "ScalarNormRope"] {
+        let matching = report["cells"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .filter(|cell| cell["mode"] == mode)
+            .collect::<Vec<_>>();
+        let exact = matching.iter().all(|cell| {
+            [
+                "output_exact",
+                "keys_exact",
+                "values_exact",
+                "all_commits_exact",
+            ]
+            .iter()
+            .all(|key| cell[*key] == true)
+        });
+        println!("A1 mode={mode} cases={} exact={exact}", matching.len());
+    }
+    Ok(())
+}
+
+#[test]
+#[ignore = "requires local Qwen checkpoint and physical Apple GPU"]
+fn prepared_attention_paired() -> Result<()> {
+    use crate::array::synchronize;
+    use std::time::Instant;
+    let mut file = std::fs::OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .open(std::env::var("MLXL3_A1_REPORT")?)?;
+    let checkpoint =
+        crate::checkpoint::inspect(Path::new(&std::env::var("MLXL3_MTP_TEST_MODEL")?))?;
+    let root: RootConfig =
+        serde_json::from_reader(File::open(checkpoint.path.join("config.json"))?)?;
+    let config = root.text_config;
+    let layer = config
+        .layer_types
+        .iter()
+        .position(|kind| kind == "full_attention")
+        .context("no attention layer")?;
+    let mut attention = Attention::load(
+        &checkpoint,
+        &format!("model.language_model.layers.{layer}.self_attn"),
+        config.hidden_size,
+        config.num_attention_heads,
+        config.num_key_value_heads,
+        config.head_dim,
+        (config.head_dim as f32 * config.partial_rotary_factor) as i32,
+        config.rope_parameters.rope_theta,
+        config.rms_norm_eps,
+    )?;
+    let mut cells = Vec::new();
+    for past in [257, 4096, 16384, 32768] {
+        let k = fixture(&[1, attention.kv_heads, past, attention.head_dim], 47)?;
+        let v = fixture(&[1, attention.kv_heads, past, attention.head_dim], 83)?;
+        k.eval()?;
+        v.eval()?;
+        for time in [2, 3, 4] {
+            let x = fixture(&[1, time, config.hidden_size], 101 + time as u32)?;
+            x.eval()?;
+            let restore = |attention: &mut Attention| -> Result<()> {
+                attention.keys = Some(k.try_clone()?);
+                attention.values = Some(v.try_clone()?);
+                attention.verification_base = None;
+                Ok(())
+            };
+            let mut oracle = None;
+            for mode in [None, Some(Preparation::BatchAll)] {
+                restore(&mut attention)?;
+                let output =
+                    with_preparation(mode, || attention.forward_verification_impl(&x, true))?;
+                let result = (
+                    checked_bytes(&output)?,
+                    checked_bytes(attention.keys.as_ref().unwrap())?,
+                    checked_bytes(attention.values.as_ref().unwrap())?,
+                );
+                if let Some(expected) = &oracle {
+                    ensure!(
+                        *expected == result,
+                        "A1 paired preflight divergence at past={past} M={time}"
+                    );
+                } else {
+                    oracle = Some(result);
+                }
+            }
+            let mut samples = [Vec::new(), Vec::new()];
+            for repeat in 0..15 {
+                for arm in if repeat % 2 == 0 { [0, 1] } else { [1, 0] } {
+                    restore(&mut attention)?;
+                    synchronize()?;
+                    let start = Instant::now();
+                    let output =
+                        with_preparation((arm == 1).then_some(Preparation::BatchAll), || {
+                            attention.forward_verification_impl(&x, true)
+                        })?;
+                    output.eval()?;
+                    attention.keys.as_ref().unwrap().eval()?;
+                    attention.values.as_ref().unwrap().eval()?;
+                    synchronize()?;
+                    let seconds = start.elapsed().as_secs_f64();
+                    if repeat >= 3 {
+                        samples[arm].push(seconds);
+                    }
+                }
+            }
+            let output = with_preparation(Some(Preparation::BatchAll), || {
+                restore(&mut attention)?;
+                attention.forward_verification_impl(&x, true)
+            })?;
+            let result = (
+                checked_bytes(&output)?,
+                checked_bytes(attention.keys.as_ref().unwrap())?,
+                checked_bytes(attention.values.as_ref().unwrap())?,
+            );
+            ensure!(
+                Some(result) == oracle,
+                "A1 paired final divergence at past={past} M={time}"
+            );
+            cells.push(serde_json::json!({"past":past,"m":time,"samples_seconds":samples,"bit_exact":true}));
+            println!("A1 paired past={past} M={time} complete");
+        }
+    }
+    serde_json::to_writer_pretty(
+        &mut file,
+        &serde_json::json!({"status":"complete","parity":true,"cells":cells,"boundary":"one real attention layer, host+GPU output/KV evaluated and synchronized; not model throughput"}),
+    )?;
+    Ok(())
+}

@@ -1,0 +1,31 @@
+{
+  "command": [
+    "/Users/henko/Documents/Codex/2026-10-05/chec/work/post-smallm-d-tests",
+    "mtp::native::dynamic::real_adaptive_depth_screen",
+    "--ignored",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "env": {
+    "MLXL3_MTP_TEST_MODEL": "/Users/henko/Library/Application Support/io.mlxl3.desktop/Models/Qwen3.8-27B-exl3-6a9ca9d0",
+    "MLXL3_MTP_TEST_HEAD": "/Users/henko/Library/Application Support/io.mlxl3.desktop/Drafts/Qwen3.8-27B-MTP-4bit",
+    "MLXL3_DYNAMIC_REPORT": "/Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm/docs/measurements/qwen27-post-smallm/d-confidence-screen.json"
+  },
+  "timeout_seconds": 900,
+  "binary_sha256": "8a1bd986cef60c4392cc43d84a0d664a7de82fe91f7c927dfa9ac0b9f6a73f75",
+  "status": "complete",
+  "before": {
+    "power": "Now drawing from 'Battery Power'\n -InternalBattery-0 (id=23724131)\t71%; discharging; 7:36 remaining present: true\n",
+    "swap": "vm.swapusage: total = 0.00M  used = 0.00M  free = 0.00M  (encrypted)\n",
+    "therm": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded\n"
+  },
+  "pid": 3243,
+  "exit_code": 0,
+  "seconds": 371.8399783750001,
+  "after": {
+    "power": "Now drawing from 'Battery Power'\n -InternalBattery-0 (id=23724131)\t67%; discharging; 6:16 remaining present: true\n",
+    "swap": "vm.swapusage: total = 0.00M  used = 0.00M  free = 0.00M  (encrypted)\n",
+    "therm": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded\n"
+  }
+}

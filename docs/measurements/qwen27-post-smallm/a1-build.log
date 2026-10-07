@@ -1,0 +1,21 @@
+['cargo', 'fmt', '--all']
+['cargo', 'test', '--release', '--features', 'mlx,chat', '--lib', '--no-run']
+   Compiling mlxl3-native v1.4.1 (/Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm)
+    Finished `release` profile [optimized] target(s) in 21.83s
+warning: the following packages contain code that will be rejected by a future version of Rust: block v0.1.6
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 1`
+  Executable unittests native/src/lib.rs (../work/post-smallm-target/release/deps/mlxl3_native-7403dac709d8357e)
+['cargo', 'clippy', '--release', '--features', 'mlx,chat', '--all-targets', '--', '-D', 'warnings']
+   Compiling mlxl3-native v1.4.1 (/Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm)
+error: using `chunks_exact` with a constant chunk size
+   --> native/src/qwen35/prepared.rs:189:14
+    |
+189 |             .chunks_exact(2)
+    |              ^^^^^^^^^^^^^^^ help: consider using `as_chunks` instead: `as_chunks::<2>().0.iter()`
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.99.0/index.html#chunks_exact_to_as_chunks
+    = note: `-D clippy::chunks-exact-to-as-chunks` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::chunks_exact_to_as_chunks)]`
+
+error: could not compile `mlxl3-native` (lib test) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...

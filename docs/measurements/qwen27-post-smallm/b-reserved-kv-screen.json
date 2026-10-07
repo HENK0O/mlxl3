@@ -1,0 +1,503 @@
+{
+  "status": "complete",
+  "parity": true,
+  "cells": [
+    {
+      "past": 8192,
+      "m": 2,
+      "capacity": 9216,
+      "bit_exact": true,
+      "retained_prefixes": 2,
+      "old_snapshot_unchanged": true,
+      "fork_rollback_exact": true,
+      "samples_ms": [
+        [
+          2.041041,
+          2.059083,
+          1.868541,
+          1.495,
+          1.853084,
+          1.298125,
+          1.377291,
+          1.978291,
+          1.548916,
+          1.376209,
+          1.87775,
+          2.020708
+        ],
+        [
+          2.052292,
+          1.852458,
+          1.871083,
+          1.604708,
+          1.39475,
+          1.6655,
+          2.078,
+          1.382416,
+          1.415083,
+          1.532333,
+          2.112584,
+          1.931125
+        ]
+      ],
+      "medians_ms": [
+        1.8608125,
+        1.758979
+      ],
+      "paired_gain_pct": -0.3420367418298653,
+      "memory_before": {
+        "active": 71346180,
+        "cache": 0,
+        "peak": 161624068
+      },
+      "memory_after": {
+        "active": 142747652,
+        "cache": 3244048,
+        "peak": 161624068
+      }
+    },
+    {
+      "past": 8192,
+      "m": 3,
+      "capacity": 9216,
+      "bit_exact": true,
+      "retained_prefixes": 3,
+      "old_snapshot_unchanged": true,
+      "fork_rollback_exact": true,
+      "samples_ms": [
+        [
+          2.233709,
+          2.0655,
+          2.192041,
+          2.433583,
+          2.485416,
+          2.611,
+          2.2895,
+          2.375542,
+          1.935209,
+          1.916666,
+          1.5745,
+          1.631208
+        ],
+        [
+          2.315083,
+          2.965792,
+          2.0525,
+          2.75375,
+          2.766,
+          2.158958,
+          2.651917,
+          2.580458,
+          2.48425,
+          1.672417,
+          2.340167,
+          2.12
+        ]
+      ],
+      "medians_ms": [
+        2.2128750000000004,
+        2.4122085
+      ],
+      "paired_gain_pct": -10.885308320442551,
+      "memory_before": {
+        "active": 71366660,
+        "cache": 0,
+        "peak": 161677316
+      },
+      "memory_after": {
+        "active": 142800900,
+        "cache": 4866064,
+        "peak": 161677316
+      }
+    },
+    {
+      "past": 8192,
+      "m": 4,
+      "capacity": 9216,
+      "bit_exact": true,
+      "retained_prefixes": 4,
+      "old_snapshot_unchanged": true,
+      "fork_rollback_exact": true,
+      "samples_ms": [
+        [
+          2.349416,
+          1.920042,
+          2.618959,
+          2.453583,
+          2.468917,
+          2.26875,
+          2.298667,
+          2.096583,
+          2.436875,
+          2.466792,
+          2.080416,
+          1.863791
+        ],
+        [
+          2.230042,
+          2.236166,
+          2.703959,
+          2.18325,
+          2.409208,
+          2.704125,
+          2.131792,
+          2.358667,
+          2.364167,
+          2.016083,
+          2.367167,
+          2.402792
+        ]
+      ],
+      "medians_ms": [
+        2.3240415,
+        2.3614170000000003
+      ],
+      "paired_gain_pct": -0.33258622718407294,
+      "memory_before": {
+        "active": 71370756,
+        "cache": 0,
+        "peak": 161681412
+      },
+      "memory_after": {
+        "active": 142804996,
+        "cache": 6488080,
+        "peak": 161681412
+      }
+    },
+    {
+      "past": 16384,
+      "m": 2,
+      "capacity": 17408,
+      "bit_exact": true,
+      "retained_prefixes": 2,
+      "old_snapshot_unchanged": true,
+      "fork_rollback_exact": true,
+      "samples_ms": [
+        [
+          3.167209,
+          2.370541,
+          2.822916,
+          2.989459,
+          2.547666,
+          3.089834,
+          2.732917,
+          2.499333,
+          2.542583,
+          2.840375,
+          2.457708,
+          2.444667
+        ],
+        [
+          2.929041,
+          3.352291,
+          3.319833,
+          2.626042,
+          2.564833,
+          2.616292,
+          2.952834,
+          2.548959,
+          2.598625,
+          2.773458,
+          2.536916,
+          2.658584
+        ]
+      ],
+      "medians_ms": [
+        2.6402915,
+        2.6423129999999997
+      ],
+      "paired_gain_pct": -2.0517572472971093,
+      "memory_before": {
+        "active": 138455044,
+        "cache": 0,
+        "peak": 312619012
+      },
+      "memory_after": {
+        "active": 276965380,
+        "cache": 3244048,
+        "peak": 312619012
+      }
+    },
+    {
+      "past": 16384,
+      "m": 3,
+      "capacity": 17408,
+      "bit_exact": true,
+      "retained_prefixes": 3,
+      "old_snapshot_unchanged": true,
+      "fork_rollback_exact": true,
+      "samples_ms": [
+        [
+          3.093584,
+          3.710292,
+          3.237459,
+          3.604,
+          3.288,
+          3.055167,
+          3.198125,
+          3.886667,
+          3.14825,
+          3.139375,
+          3.049416,
+          3.089958
+        ],
+        [
+          3.4725,
+          3.979,
+          3.62275,
+          3.19525,
+          3.265,
+          3.094166,
+          3.201959,
+          3.512,
+          3.062542,
+          3.579708,
+          3.1835,
+          3.275208
+        ]
+      ],
+      "medians_ms": [
+        3.1731875,
+        3.270104
+      ],
+      "paired_gain_pct": -2.7361232847408434,
+      "memory_before": {
+        "active": 138475524,
+        "cache": 0,
+        "peak": 312672260
+      },
+      "memory_after": {
+        "active": 277018628,
+        "cache": 4866064,
+        "peak": 312672260
+      }
+    },
+    {
+      "past": 16384,
+      "m": 4,
+      "capacity": 17408,
+      "bit_exact": true,
+      "retained_prefixes": 4,
+      "old_snapshot_unchanged": true,
+      "fork_rollback_exact": true,
+      "samples_ms": [
+        [
+          4.515834,
+          3.942625,
+          4.458375,
+          3.674667,
+          3.682292,
+          3.610791,
+          3.691542,
+          3.689917,
+          3.614667,
+          3.694,
+          3.651167,
+          3.564084
+        ],
+        [
+          4.10975,
+          4.151959,
+          3.934125,
+          4.183,
+          3.900333,
+          3.952875,
+          3.879458,
+          3.98975,
+          3.734375,
+          3.745959,
+          4.233208,
+          3.763167
+        ]
+      ],
+      "medians_ms": [
+        3.6861045,
+        3.9435000000000002
+      ],
+      "paired_gain_pct": -5.166058737333612,
+      "memory_before": {
+        "active": 138479620,
+        "cache": 0,
+        "peak": 312676356
+      },
+      "memory_after": {
+        "active": 277022724,
+        "cache": 6488080,
+        "peak": 312676356
+      }
+    },
+    {
+      "past": 32768,
+      "m": 2,
+      "capacity": 33792,
+      "bit_exact": true,
+      "retained_prefixes": 2,
+      "old_snapshot_unchanged": true,
+      "fork_rollback_exact": true,
+      "samples_ms": [
+        [
+          5.79675,
+          5.690834,
+          5.754209,
+          6.029083,
+          5.485625,
+          5.996958,
+          5.763667,
+          5.686959,
+          5.48775,
+          5.5675,
+          5.460667,
+          5.596208
+        ],
+        [
+          5.620084,
+          6.387125,
+          6.106625,
+          5.872125,
+          5.416583,
+          5.541541,
+          5.723875,
+          5.615375,
+          5.701375,
+          5.513209,
+          5.72625,
+          5.705209
+        ]
+      ],
+      "medians_ms": [
+        5.6888965,
+        5.703291999999999
+      ],
+      "paired_gain_pct": 0.8399687361481778,
+      "memory_before": {
+        "active": 272672772,
+        "cache": 0,
+        "peak": 614608900
+      },
+      "memory_after": {
+        "active": 545400836,
+        "cache": 3244048,
+        "peak": 614608900
+      }
+    },
+    {
+      "past": 32768,
+      "m": 3,
+      "capacity": 33792,
+      "bit_exact": true,
+      "retained_prefixes": 3,
+      "old_snapshot_unchanged": true,
+      "fork_rollback_exact": true,
+      "samples_ms": [
+        [
+          7.235792,
+          7.936083,
+          6.468875,
+          6.976292,
+          6.864792,
+          7.053458,
+          7.0265,
+          7.181125,
+          7.420542,
+          7.147042,
+          6.812542,
+          7.607833
+        ],
+        [
+          7.014042,
+          6.815083,
+          6.743791,
+          6.9515,
+          7.002125,
+          6.974292,
+          7.034792,
+          7.142,
+          6.900709,
+          6.561458,
+          6.979917,
+          6.995042
+        ]
+      ],
+      "medians_ms": [
+        7.10025,
+        6.9771045
+      ],
+      "paired_gain_pct": 0.841463686796462,
+      "memory_before": {
+        "active": 272693252,
+        "cache": 0,
+        "peak": 614662148
+      },
+      "memory_after": {
+        "active": 545454084,
+        "cache": 4866064,
+        "peak": 614662148
+      }
+    },
+    {
+      "past": 32768,
+      "m": 4,
+      "capacity": 33792,
+      "bit_exact": true,
+      "retained_prefixes": 4,
+      "old_snapshot_unchanged": true,
+      "fork_rollback_exact": true,
+      "samples_ms": [
+        [
+          8.219042,
+          8.397667,
+          8.239667,
+          8.213625,
+          7.912125,
+          8.078417,
+          8.169833,
+          8.02925,
+          8.094583,
+          8.327916,
+          8.000333,
+          8.203791
+        ],
+        [
+          8.259583,
+          8.136875,
+          8.995666,
+          8.599667,
+          8.689917,
+          8.521209,
+          8.581,
+          8.20125,
+          8.459416,
+          7.883417,
+          8.047875,
+          8.385
+        ]
+      ],
+      "medians_ms": [
+        8.186812,
+        8.422208
+      ],
+      "paired_gain_pct": -3.236926821930103,
+      "memory_before": {
+        "active": 272697348,
+        "cache": 0,
+        "peak": 614666244
+      },
+      "memory_after": {
+        "active": 545458180,
+        "cache": 6488080,
+        "peak": 614666244
+      }
+    }
+  ],
+  "conditions_before": {
+    "power": "Now drawing from 'Battery Power'\n -InternalBattery-0 (id=23724131)\t67%; discharging; 6:36 remaining present: true\n",
+    "swap": "vm.swapusage: total = 0.00M  used = 0.00M  free = 0.00M  (encrypted)\n",
+    "therm": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded\n"
+  },
+  "boundary": "one synthetic FP16 attention/cache component, old snapshots live; not native cache or model throughput",
+  "conditions_after": {
+    "power": "Now drawing from 'Battery Power'\n -InternalBattery-0 (id=23724131)\t67%; discharging; 6:36 remaining present: true\n",
+    "swap": "vm.swapusage: total = 0.00M  used = 0.00M  free = 0.00M  (encrypted)\n",
+    "therm": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded\n"
+  }
+}

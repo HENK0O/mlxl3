@@ -1,0 +1,19 @@
+   Compiling mlxl3-native v1.4.1 (/Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.66s
+warning: the following packages contain code that will be rejected by a future version of Rust: block v0.1.6
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 1`
+   Compiling mlxl3-native v1.4.1 (/Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm)
+    Finished `release` profile [optimized] target(s) in 20.98s
+warning: the following packages contain code that will be rejected by a future version of Rust: block v0.1.6
+note: to see what the problems were, use the option `--future-incompat-report`, or run `cargo report future-incompatibilities --id 1`
+  Executable unittests native/src/lib.rs (../work/post-smallm-target/release/deps/mlxl3_native-7403dac709d8357e)
+
+running 1 test
+
+thread 'mtp::native::dynamic::scope_restores_after_errors_and_panics' (39778) panicked at native/src/mtp/native/dynamic.rs:108:60:
+test panic
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test mtp::native::dynamic::scope_restores_after_errors_and_panics ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 100 filtered out; finished in 0.00s
+
