@@ -1,0 +1,26 @@
+F...                                                                     [100%]
+=================================== FAILURES ===================================
+____ test_missing_cache_or_invalid_counts_rejected[cached_prompt_tokens-0] _____
+
+key = 'cached_prompt_tokens', bad = 0
+
+    @pytest.mark.parametrize(
+        "key,bad",
+        [
+            ("cached_prompt_tokens", 0),
+            ("cached_prompt_tokens", True),
+            ("prompt_tokens", True),
+            ("generated_tokens", 0),
+        ],
+    )
+    def test_missing_cache_or_invalid_counts_rejected(key, bad):
+        event = response("short", True)
+        event["stats"][key] = bad
+>       with pytest.raises((ValueError, AssertionError)):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE any of (ValueError, AssertionError)
+
+tests/test_prefill_release_benchmark.py:50: Failed
+=========================== short test summary info ============================
+FAILED tests/test_prefill_release_benchmark.py::test_missing_cache_or_invalid_counts_rejected[cached_prompt_tokens-0]
+1 failed, 3 passed, 14 deselected in 0.02s

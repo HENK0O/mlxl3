@@ -1,0 +1,17 @@
+{
+  "base": "d20ca721d808759f07ecf8976274d878e64a1ed3",
+  "merge_commit": "3dc75cc",
+  "sources": {
+    "native/src/contracts.rs": "bab205067fd8a9dfd2c15f9da114ec74f6ae7c1ecc8482536518ab3e636facaa",
+    "native/src/lib.rs": "23f7788853f8992536970bda0c0ea99d3ee329c924f5402c02c01626d5362f93",
+    "native/src/main.rs": "6cafada35e48893abcfae783167b0966adead0b69a7f53b13a876d39392a2376",
+    "native/src/mtp.rs": "09c3e015a7c2c9dee8de44b9dd233836c2734d9f2786b2f71e43039cc041d54b",
+    "native/src/mtp/depth_policy.rs": "47271c4f7ee942817dc6faf251d43c8a1b6a5456332e10e49468a378c2fc07c2",
+    "native/src/mtp/native/dynamic.rs": "47cb436765777272753d95630c0e9f3888eb67f47c4d1d3ea6e99cbe70e85b7b",
+    "native/src/qwen35.rs": "8cd0626554d482f88b7b176f201e135898b67325389a2b06b46a23e1724da444",
+    "native/src/qwen35/prepared.rs": "e9a931f7a4014908dd0f4e4673ddd56fed49792b6409959a0ac87cec9624ca87",
+    "native/src/qwen35/profile.rs": "f46272256cdf2ddd8db35a92a0e289fc19c4cf2bc5e3018e6841cecf4dd34abe"
+  },
+  "binary_sha256": "8691aa306bab48c543fabe052ad003171c5b4e948a8ab76292cc3923d2b54a32",
+  "test_binary_sha256": "40e33fd93bc74e12e7411ab070c9a3a873064692af28a09301ad282ccb550af1"
+}

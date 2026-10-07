@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/Users/henko/Documents/Codex/2026-10-05/chec/work/post-smallm-a1-bridge-quality.py", line 27, in <module>
+    assert type(event['stats']['prompt_tokens']) is int and 16384<=event['stats']['prompt_tokens']<32768
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

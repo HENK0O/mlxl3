@@ -17,6 +17,9 @@ docs/measurements/pr28-*/*.json linguist-generated=true
 docs/measurements/pr28-*/*.log linguist-generated=true -whitespace
 
 docs/measurements/qwen27-post-smallm/*.json linguist-generated=true
+docs/measurements/qwen27-post-smallm/*.json.gz linguist-generated=true binary
 docs/measurements/qwen27-post-smallm/*.jsonl linguist-generated=true
 docs/measurements/qwen27-post-smallm/*.log linguist-generated=true -whitespace
+docs/measurements/qwen27-post-smallm/*.stderr linguist-generated=true
+docs/measurements/qwen27-post-smallm/*.txt linguist-generated=true
 docs/measurements/qwen27-post-smallm/*.patch -whitespace

@@ -1,0 +1,3 @@
+bridge 1.4.2 A1=False H=False: long/short/cache exact
+bridge 1.4.2 A1=False H=True: long/short/cache exact
+bridge 1.4.2 A1=True H=True: long/short/cache exact

@@ -1,0 +1,43 @@
+import hashlib,json,os,sys,tempfile,time
+from pathlib import Path
+root=Path.cwd();sys.path.insert(0,str(root/'benchmarks'))
+from benchmark_smallm_bridge import until,fingerprint
+from native_json_process import JsonProcess
+from benchmark_lmhead_mb4 import conditions
+from tokenizers import Tokenizer
+out=root/'docs/measurements/qwen27-post-smallm';report={'status':'running','parity':False,'runs':[],'boundary':'16-token real bridge wiring/parity only; not sustained performance'}
+output=out/'a1-bridge-quality.json'
+def save(): output.write_text(json.dumps(report,indent=2)+'\n')
+if output.exists(): raise RuntimeError('refusing overwrite')
+model=Path('/Users/henko/Library/Application Support/io.mlxl3.desktop/Models/Qwen3.8-27B-exl3-6a9ca9d0')
+head=Path('/Users/henko/Library/Application Support/io.mlxl3.desktop/Drafts/Qwen3.8-27B-MTP-4bit')
+engine=root.parent/'work/post-smallm-a1-runtime-rs'
+text='Une comparaison fiable garde les mêmes données et vérifie les résultats. Les mesures longues doivent conserver les erreurs et contrôler les conditions.\n'
+prompt=text*450+'\nExplique longuement en français comment analyser ce document et répondre avec des exemples.'
+count=len(Tokenizer.from_file(str(model/'tokenizer.json')).encode(prompt).ids)
+assert 16384<count<32000,(count,'prompt outside numerical test bounds')
+report.update(prompt_plain_tokens=count,prompt_sha256=hashlib.sha256(prompt.encode()).hexdigest(),engine_sha256=hashlib.sha256(engine.read_bytes()).hexdigest());save()
+reference=None
+try:
+    for enabled in [False,True]:
+        row={'enabled':enabled,'status':'running','conditions_before':conditions()};report['runs'].append(row);save()
+        with tempfile.TemporaryDirectory(prefix='post-smallm-bridge-') as directory,(out/f'a1-bridge-quality-{int(enabled)}.stderr').open('xb') as stderr,JsonProcess([str(engine),'--registry',str(Path(directory)/'models.json'),'bridge',str(model),'--context-length','32768'],env=os.environ|{'MLXL3_EXPERIMENTAL_BATCHED_VERIFY':'1' if enabled else '0'},stderr=stderr) as process:
+            row['ready'],_=until(process,'ready',time.monotonic()+120)
+            deadline=time.monotonic()+600
+            process.send({'type':'generate','request_id':'verify-route','conversation_id':'post-smallm-isolated','messages':[{'role':'user','content':prompt}],'max_tokens':16,'temperature':0,'top_k':1,'repetition_penalty':1,'mtp':True,'mtp_depth':2,'mtp_head_path':str(head),'reuse_prompt_cache':False},deadline)
+            event,text=until(process,'complete',deadline,'verify-route')
+            signature=fingerprint(event,text,16)
+            assert type(event['stats']['prompt_tokens']) is int and 16384<=event['stats']['prompt_tokens']<32768
+            assert event['stats']['cached_prompt_tokens']==0
+            row.update(event=event,text=text,fingerprint=signature)
+            if reference is None: reference=signature
+            assert signature==reference,'bridge target IDs/text/history/MTP counters differ'
+            row.update(status='complete',parity=True,conditions_after=conditions());save()
+            process.send({'type':'shutdown'},time.monotonic()+5)
+            assert process.process.wait(timeout=10)==0,'bridge shutdown failed'
+        print('bridge A1',enabled,'exact',event['stats']['prompt_tokens'],flush=True)
+    assert len(report['runs'])==2
+    report.update(status='complete',parity=True)
+except BaseException as error:
+    report.update(status='failed',parity=False,error=repr(error));raise
+finally:save()

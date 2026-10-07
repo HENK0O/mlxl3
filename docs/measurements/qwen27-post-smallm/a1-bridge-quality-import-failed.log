@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/Users/henko/Documents/Codex/2026-10-05/chec/work/post-smallm-a1-bridge-quality.py", line 7, in <module>
+    from tokenizers import Tokenizer
+ModuleNotFoundError: No module named 'tokenizers'

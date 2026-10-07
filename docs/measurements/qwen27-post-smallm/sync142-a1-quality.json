@@ -1,0 +1,86 @@
+{
+  "boundary": "real target verify_mtp, stock/BatchAll; output+raw+full-state synchronized, no forced component fences; not MTP advance or sustained generation",
+  "cells": [
+    {
+      "bit_exact": true,
+      "commits_checked": 2,
+      "context": 24,
+      "m": 2,
+      "production_route": true,
+      "samples_seconds": [
+        [],
+        []
+      ],
+      "state_arrays": 129,
+      "validation_only": true
+    },
+    {
+      "bit_exact": true,
+      "commits_checked": 3,
+      "context": 24,
+      "m": 3,
+      "production_route": true,
+      "samples_seconds": [
+        [],
+        []
+      ],
+      "state_arrays": 129,
+      "validation_only": true
+    },
+    {
+      "bit_exact": true,
+      "commits_checked": 4,
+      "context": 24,
+      "m": 4,
+      "production_route": true,
+      "samples_seconds": [
+        [],
+        []
+      ],
+      "state_arrays": 129,
+      "validation_only": true
+    },
+    {
+      "bit_exact": true,
+      "commits_checked": 2,
+      "context": 16384,
+      "m": 2,
+      "production_route": true,
+      "samples_seconds": [
+        [],
+        []
+      ],
+      "state_arrays": 129,
+      "validation_only": true
+    },
+    {
+      "bit_exact": true,
+      "commits_checked": 3,
+      "context": 16384,
+      "m": 3,
+      "production_route": true,
+      "samples_seconds": [
+        [],
+        []
+      ],
+      "state_arrays": 129,
+      "validation_only": true
+    },
+    {
+      "bit_exact": true,
+      "commits_checked": 4,
+      "context": 16384,
+      "m": 4,
+      "production_route": true,
+      "samples_seconds": [
+        [],
+        []
+      ],
+      "state_arrays": 129,
+      "validation_only": true
+    }
+  ],
+  "error": null,
+  "parity": true,
+  "status": "complete"
+}

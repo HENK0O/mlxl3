@@ -1,0 +1,45 @@
+{
+  "status": "failed",
+  "parity": false,
+  "runs": [
+    {
+      "enabled": false,
+      "status": "running",
+      "conditions_before": {
+        "power": "Now drawing from 'Battery Power'\n -InternalBattery-0 (id=23724131)\t66%; discharging; 7:46 remaining present: true\n",
+        "swap": "vm.swapusage: total = 0.00M  used = 0.00M  free = 0.00M  (encrypted)\n",
+        "therm": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded\n"
+      },
+      "ready": {
+        "bridge_protocol": 1,
+        "context_limit": 32768,
+        "dflash_supported": false,
+        "load_seconds": 2.344615917,
+        "mcp_errors": {},
+        "mcp_servers": 0,
+        "mcp_tools": 0,
+        "mlx_version": "0.32.2",
+        "model": "/Users/henko/Library/Application Support/io.mlxl3.desktop/Models/Qwen3.8-27B-exl3-6a9ca9d0",
+        "model_context_limit": 262144,
+        "modules": 401,
+        "mtp_auto_download_supported": true,
+        "mtp_configure_supported": true,
+        "mtp_max_depth": 3,
+        "mtp_supported": true,
+        "mtp_tune_supported": true,
+        "mtp_tuning_key": "82434097046fd932:1.4.1:8f63e6c89e65-dirty:release:0.32.2:Apple M5:32768",
+        "resident_gb": 9.696705133,
+        "runtime_commit": "8f63e6c89e65-dirty",
+        "runtime_executable": "/Users/henko/Documents/Codex/2026-10-05/chec/work/post-smallm-a1-runtime-rs",
+        "runtime_profile": "release",
+        "runtime_version": "1.4.1",
+        "type": "ready"
+      }
+    }
+  ],
+  "boundary": "16-token real bridge wiring/parity only; not sustained performance",
+  "prompt_plain_tokens": "not measured; actual bridge prompt_tokens checked",
+  "prompt_sha256": "72ccd3ef10db1fc11d4068c7e1040e89f4b9463be899ec778e7e9b2292e7a40b",
+  "engine_sha256": "8eb51dc5769587379c8ddab3c716203b6855072b951b41ade92a5815e1fa89a1",
+  "error": "AssertionError()"
+}

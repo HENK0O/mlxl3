@@ -1,0 +1,27 @@
+{
+  "command": [
+    "/Users/henko/Documents/Codex/2026-10-05/chec/work/post-smallm-sync142-tests",
+    "array::tests::clear_cache_preserves_live_arrays_and_releases_unused_buffers",
+    "--ignored",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "env": {},
+  "timeout_seconds": 60,
+  "binary_sha256": "40e33fd93bc74e12e7411ab070c9a3a873064692af28a09301ad282ccb550af1",
+  "status": "complete",
+  "before": {
+    "power": "Now drawing from 'Battery Power'\n -InternalBattery-0 (id=23724131)\t49%; discharging; 3:23 remaining present: true\n",
+    "swap": "vm.swapusage: total = 4096.00M  used = 2360.81M  free = 1735.19M  (encrypted)\n",
+    "therm": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded\n"
+  },
+  "pid": 7081,
+  "exit_code": 0,
+  "seconds": 0.39324404099988897,
+  "after": {
+    "power": "Now drawing from 'Battery Power'\n -InternalBattery-0 (id=23724131)\t49%; discharging; 3:23 remaining present: true\n",
+    "swap": "vm.swapusage: total = 4096.00M  used = 2360.81M  free = 1735.19M  (encrypted)\n",
+    "therm": "Note: No thermal warning level has been recorded\nNote: No performance warning level has been recorded\nNote: No CPU power status has been recorded\n"
+  }
+}

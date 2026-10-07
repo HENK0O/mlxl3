@@ -1,0 +1,5 @@
+Four compressed profiles reproduce original bytes and hashes
+Nine final Rust source snapshots, bridge driver and two frozen binaries match
+Report and evidence index links exist
+Workflow union includes all four benchmark drivers and regressions
+Every JSON parses; two memory windows and fifteen bridge requests validated

@@ -1,0 +1,7 @@
+{
+  "status": "failed",
+  "error": "AssertionError: postprocessing incorrectly required equal MLX allocated-byte metrics across independent processes",
+  "observed_active_difference_bytes": 16384,
+  "numeric_parity_failure": false,
+  "raw_reports_unchanged": true
+}

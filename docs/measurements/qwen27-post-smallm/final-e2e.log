@@ -1,0 +1,17 @@
+
+==================================== ERRORS ====================================
+_______________ ERROR collecting tests/test_ling_integration.py ________________
+ImportError while importing test module '/Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm/tests/test_ling_integration.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+/Users/henko/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_ling_integration.py:7: in <module>
+    from mlx_lm.models.bailing_moe_v3 import ModelArgs
+E   ModuleNotFoundError: No module named 'mlx_lm'
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_quantize_measure_metrics.py:11: could not import 'ponyexl3.convert': No module named 'ponyexl3'
+ERROR tests/test_ling_integration.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 skipped, 1 error in 0.11s

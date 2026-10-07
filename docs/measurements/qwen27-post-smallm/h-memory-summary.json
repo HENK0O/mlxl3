@@ -1,0 +1,51 @@
+{
+  "status": "complete",
+  "bridge_requests": 15,
+  "generated_tokens": 240,
+  "parity": true,
+  "default_enabled": false,
+  "sustained_speed_gain": "not measured",
+  "peak_memory_gain": "not validated",
+  "windows": [
+    {
+      "order": "stock\u2192H",
+      "stock": {
+        "mlx_active_bytes": 10730995580,
+        "mlx_cache_bytes": 7383597968,
+        "mlx_peak_bytes": 11803657702,
+        "process_footprint_bytes": 18280535728,
+        "process_lifetime_peak_bytes": 18381854384
+      },
+      "H": {
+        "mlx_active_bytes": 10730995580,
+        "mlx_cache_bytes": 3398981216,
+        "mlx_peak_bytes": 11803624934,
+        "process_footprint_bytes": 14294128328,
+        "process_lifetime_peak_bytes": 18302424752
+      },
+      "footprint_saved_bytes": 3986407400,
+      "footprint_saved_GiB": 3.7126312032341957,
+      "H_minus_stock_active_bytes": 0
+    },
+    {
+      "order": "H\u2192stock",
+      "stock": {
+        "mlx_active_bytes": 10730979196,
+        "mlx_cache_bytes": 7383616400,
+        "mlx_peak_bytes": 11803657702,
+        "process_footprint_bytes": 18280011344,
+        "process_lifetime_peak_bytes": 18348463696
+      },
+      "H": {
+        "mlx_active_bytes": 10730995580,
+        "mlx_cache_bytes": 3399001696,
+        "mlx_peak_bytes": 11803624934,
+        "process_footprint_bytes": 14295258680,
+        "process_lifetime_peak_bytes": 18277783072
+      },
+      "footprint_saved_bytes": 3984752664,
+      "footprint_saved_GiB": 3.711090110242367,
+      "H_minus_stock_active_bytes": 16384
+    }
+  ]
+}

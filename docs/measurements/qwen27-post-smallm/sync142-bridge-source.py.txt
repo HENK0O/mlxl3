@@ -1,0 +1,64 @@
+import hashlib,json,math,os,sys,tempfile,time
+from pathlib import Path
+root=Path.cwd();sys.path.insert(0,str(root/'benchmarks'))
+from benchmark_smallm_bridge import until,fingerprint
+from native_json_process import JsonProcess
+from benchmark_lmhead_mb4 import conditions
+out=root/'docs/measurements/qwen27-post-smallm';report={'status':'running','parity':False,'runs':[],'boundary':'16-token cold+cached requests per arm; real1.4.2 bridge IDs/history/MTP parity and memory observation, not sustained throughput'}
+output=out/'sync142-bridge-memory.json'
+def save(): output.write_text(json.dumps(report,indent=2)+'\n')
+if output.exists(): raise RuntimeError('refusing overwrite')
+model=Path('/Users/henko/Library/Application Support/io.mlxl3.desktop/Models/Qwen3.8-27B-exl3-6a9ca9d0')
+head=Path('/Users/henko/Library/Application Support/io.mlxl3.desktop/Drafts/Qwen3.8-27B-MTP-4bit')
+engine=root.parent/'work/post-smallm-sync142-rs'
+text='Une comparaison fiable garde les mêmes données et vérifie les résultats. Les mesures longues doivent conserver les erreurs et contrôler les conditions.\n'
+prompt=text*640+'\nExplique longuement en français comment analyser ce document et répondre avec des exemples.'
+report.update(prompt_plain_tokens='not measured; actual bridge prompt_tokens checked',prompt_sha256=hashlib.sha256(prompt.encode()).hexdigest(),engine_sha256=hashlib.sha256(engine.read_bytes()).hexdigest(),inherited_options={name:os.environ.get(name) for name in ['MLXL3_QWEN_PIPELINE','MLX_MAX_MB_PER_BUFFER','MTPLX_MLX_COMMAND_BUFFER_MB']});save()
+reference=None
+try:
+    for enabled,release in [(False,False),(False,True),(True,True)]:
+        row={'enabled':enabled,'release_scratch':release,'status':'running','conditions_before':conditions()};report['runs'].append(row);save()
+        with tempfile.TemporaryDirectory(prefix='post-smallm-bridge-') as directory,(out/f'sync142-bridge-memory-{int(enabled)}-{int(release)}.stderr').open('xb') as stderr,JsonProcess([str(engine),'--registry',str(Path(directory)/'models.json'),'bridge',str(model),'--context-length','32768'],env=os.environ|{'MLXL3_EXPERIMENTAL_BATCHED_VERIFY':'1' if enabled else '0','MLXL3_EXPERIMENTAL_PREFILL_CACHE_RELEASE':'1' if release else '0','MLXL3_MTP_LOOKUP':'0'},stderr=stderr) as process:
+            row['ready'],_=until(process,'ready',time.monotonic()+120)
+            assert row['ready']['runtime_version']=='1.4.2',row['ready']
+            row['measurements']=[]
+            for cached in [False,True]:
+                measurement={'cached_request':cached,'status':'running'}
+                row['measurements'].append(measurement);save()
+                deadline=time.monotonic()+600
+                process.send({'type':'generate','request_id':'verify-route','conversation_id':'post-smallm-isolated','messages':[{'role':'user','content':prompt}],'max_tokens':16,'temperature':0,'top_k':1,'repetition_penalty':1,'mtp':True,'mtp_depth':2,'mtp_head_path':str(head),'reuse_prompt_cache':True},deadline)
+                text=''
+                while True:
+                    event=process.receive(deadline)
+                    if event.get('type')=='error': raise RuntimeError(event)
+                    if event.get('request_id')!='verify-route': continue
+                    if event.get('type')=='context_usage':
+                        row['actual_context_usage']=event;save()
+                        assert type(event['used_tokens']) is int and 16384<=event['used_tokens']<32768,event
+                    if event.get('type')=='delta':
+                        text+=event.get('text','');assert len(text)<4*1024*1024
+                    if event.get('type')=='complete':break
+                measurement.update(event=event,text=text);save()
+                signature=fingerprint(event,text,16)
+                assert type(event['stats']['prompt_tokens']) is int and 16384<=event['stats']['prompt_tokens']<32768
+                reused=event['stats']['cached_prompt_tokens']
+                assert type(reused) is int and 0<=reused<=event['stats']['prompt_tokens']
+                assert (reused==0) if not cached else (reused>0)
+                memory=event['stats']['memory']
+                for key in ['mlx_active_bytes','mlx_cache_bytes','mlx_peak_bytes','process_footprint_bytes']:
+                    value=memory[key]
+                    assert type(value) in (int,float) and math.isfinite(value) and value>=0,(key,value)
+                assert memory['mlx_active_bytes']>0 and memory['process_footprint_bytes']>0
+                measurement.update(event=event,text=text,fingerprint=signature)
+                if reference is None: reference=signature
+                assert signature==reference,'bridge target IDs/text/history/MTP counters differ'
+                measurement.update(status='complete',parity=True,conditions_after=conditions());save()
+            row.update(status='complete',parity=True);save()
+            process.send({'type':'shutdown'},time.monotonic()+5)
+            assert process.process.wait(timeout=10)==0,'bridge shutdown failed'
+        print('bridge1.4.2 A1/H',enabled,release,'cold/cached exact',event['stats']['prompt_tokens'],flush=True)
+    assert len(report['runs'])==3
+    report.update(status='complete',parity=True)
+except BaseException as error:
+    report.update(status='failed',parity=False,error=repr(error));raise
+finally:save()

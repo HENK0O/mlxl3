@@ -1,0 +1,64 @@
+Using Python 3.12.14 environment at: /Users/henko/Documents/Codex/2026-10-05/chec/work/post-smallm-ci-venv
+   Updating https://github.com/ml-explore/mlx-lm.git (44b42cc137763309b0662284ce12d7a95b8c5d99)
+    Updated https://github.com/ml-explore/mlx-lm.git (44b42cc137763309b0662284ce12d7a95b8c5d99)
+Resolved 44 packages in 3.34s
+   Building mlxl3 @ file:///Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm
+   Building mlx-lm @ git+https://github.com/ml-explore/mlx-lm.git@44b42cc137763309b0662284ce12d7a95b8c5d99
+Downloading ruff (9.3MiB)
+Downloading tokenizers (2.9MiB)
+Downloading transformers (11.5MiB)
+Downloading sentencepiece (1.3MiB)
+Downloading numpy (5.1MiB)
+      Built mlx-lm @ git+https://github.com/ml-explore/mlx-lm.git@44b42cc137763309b0662284ce12d7a95b8c5d99
+      Built mlxl3 @ file:///Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm
+ Downloaded sentencepiece
+ Downloaded tokenizers
+ Downloaded numpy
+ Downloaded ruff
+ Downloaded transformers
+Prepared 18 packages in 3.17s
+Installed 44 packages in 79ms
+ + annotated-doc==0.0.5
+ + anyio==4.15.1
+ + attrs==26.1.0
+ + certifi==2026.7.22
+ + click==8.5.0
+ + filelock==4.0.12
+ + fsspec==2026.9.0
+ + h11==0.16.0
+ + hf-xet==1.6.0
+ + httpcore==1.0.9
+ + httpx==0.28.1
+ + huggingface-hub==1.29.0
+ + idna==3.20
+ + iniconfig==2.3.1
+ + jinja2==3.1.6
+ + jsonschema==4.26.0
+ + jsonschema-specifications==2025.9.1
+ + markdown-it-py==4.2.0
+ + markupsafe==3.0.4
+ + mdurl==0.1.2
+ + mlx==0.32.2
+ + mlx-lm==0.32.0 (from git+https://github.com/ml-explore/mlx-lm.git@44b42cc137763309b0662284ce12d7a95b8c5d99)
+ + mlx-metal==0.32.2
+ + mlxl3==1.0.3 (from file:///Users/henko/Documents/Codex/2026-10-05/chec/mlxl3-post-smallm)
+ + numpy==2.5.2
+ + packaging==26.3
+ + pluggy==1.6.0
+ + protobuf==7.36.2
+ + pygments==2.21.0
+ + pytest==9.1.1
+ + pyyaml==6.0.3
+ + referencing==0.37.0
+ + regex==2026.9.29
+ + rich==15.0.0
+ + rpds-py==2026.6.3
+ + ruff==0.16.10
+ + safetensors==0.8.0
+ + sentencepiece==0.2.2
+ + shellingham==1.5.4
+ + tokenizers==0.23.1
+ + tqdm==4.70.1
+ + transformers==5.16.1
+ + typer==0.27.3
+ + typing-extensions==4.16.0

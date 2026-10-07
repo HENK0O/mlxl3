@@ -1,0 +1,38 @@
+{
+  "status": "complete",
+  "byte_exact_decompression": true,
+  "entries": [
+    {
+      "original": "profile-matrix-v2.json",
+      "original_bytes": 11330886,
+      "original_sha256": "93ed7faddd15d786ce08969d840ff7225087390e3da570d8267db9bea96c78a8",
+      "archive": "profile-matrix-v2.json.gz",
+      "archive_bytes": 607395,
+      "archive_sha256": "de0b2e8735963fb45409ea04426271c72b47c65fc5209d3a1d9682285c8c4d5a"
+    },
+    {
+      "original": "profile-matrix.json",
+      "original_bytes": 2815617,
+      "original_sha256": "151845887e6b04e5dbe99a20df6f454befc8380595f56e60b28765c98e838347",
+      "archive": "profile-matrix.json.gz",
+      "archive_bytes": 146729,
+      "archive_sha256": "cf92b75f82a9fae7a532e8222c3ff1a3fee1d33e1c6b3ccb68aa83b37c5e39d7"
+    },
+    {
+      "original": "profile-smoke-v2.json",
+      "original_bytes": 1415849,
+      "original_sha256": "9b85c91a461c4597727054060c092e5ba042ee7c0e478a19181ebc73c5d230de",
+      "archive": "profile-smoke-v2.json.gz",
+      "archive_bytes": 73709,
+      "archive_sha256": "322e5850a1c1ea1751e820c0d6c118629b90027725bfb37cfa95eb3f4ef460a6"
+    },
+    {
+      "original": "profile-smoke.json",
+      "original_bytes": 1407289,
+      "original_sha256": "692c75b0f43ad5a8fc39bbc48e316b24c5661116013496176a466a889d9c3acc",
+      "archive": "profile-smoke.json.gz",
+      "archive_bytes": 71890,
+      "archive_sha256": "6c7b5e4f7b57e696d6d25a555287d93e5844f8a0ea80d6e69c808b329c804c06"
+    }
+  ]
+}
