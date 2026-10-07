@@ -46,6 +46,10 @@ impl Head {
     ) -> Result<(Vec<u32>, Cache)> {
         ensure!((1..=3).contains(&width), "invalid dynamic MTP width");
         ensure!(
+            self.draft_head.is_none() && self.draft_ids.is_none(),
+            "confidence screen only supports the legacy full-vocabulary head"
+        );
+        ensure!(
             (1..=16_777_216).contains(&self.layout.vocab_size),
             "IDs not exactly representable as f32"
         );
@@ -171,6 +175,7 @@ fn real_adaptive_depth_screen() -> Result<()> {
         .create_new(true)
         .open(std::env::var("MLXL3_DYNAMIC_REPORT")?)?;
     let mut cells = Vec::new();
+    let validation_only = std::env::var("MLXL3_DYNAMIC_VALIDATION_ONLY").as_deref() == Ok("1");
     let persist = |file: &mut File,
                    cells: &[serde_json::Value],
                    status: &str,
@@ -294,7 +299,14 @@ fn real_adaptive_depth_screen() -> Result<()> {
                     context + 256
                 };
                 let first = with_policy(policy, || {
-                    actual.advance(&mut target, &mut head, anchor, context_limit, output_budget)
+                    actual.advance(
+                        &mut target,
+                        &mut head,
+                        anchor,
+                        context_limit,
+                        output_budget,
+                        |_| false,
+                    )
                 })?;
                 let width = actual.proposed;
                 let logits = checked_logits(&scope.logits()?, width)?;
@@ -321,8 +333,14 @@ fn real_adaptive_depth_screen() -> Result<()> {
                 clear_cache()?;
                 let mut stock = Session::new(width)?;
                 let scope = profile::Scope::capture()?;
-                let expected =
-                    stock.advance(&mut target, &mut head, anchor, context_limit, output_budget)?;
+                let expected = stock.advance(
+                    &mut target,
+                    &mut head,
+                    anchor,
+                    context_limit,
+                    output_budget,
+                    |_| false,
+                )?;
                 ensure!(
                     first == expected
                         && actual.pending == stock.pending
@@ -342,6 +360,15 @@ fn real_adaptive_depth_screen() -> Result<()> {
                 );
                 quality.push(serde_json::json!({"policy_index":index,"actual_depth":width,"output_budget":output_budget,"context_limit":context_limit,"scores":scores,"accepted":actual.accepted,"bit_exact":true,"state_arrays":129}));
             }
+            if validation_only {
+                cells.push(serde_json::json!({"workload":workload,"context":context,"quality":quality,"validation_only":true,"timings":[],"offline_trace":[]}));
+                persist(&mut file, &cells, "running", None)?;
+                target.restore(base)?;
+                head.restore(draft_base)?;
+                clear_cache()?;
+                println!("D {workload}:32-case campaign quality only, exact legacy head");
+                continue;
+            }
             let mut timings = Vec::new();
             // Fixed depths provide the relevant controls. Always-D3 scored
             // isolates the new readback cost without confounding early stops.
@@ -358,7 +385,14 @@ fn real_adaptive_depth_screen() -> Result<()> {
                         let mut session = Session::new(depth)?;
                         let start = Instant::now();
                         if arm == 0 {
-                            session.advance(&mut target, &mut head, anchor, context + 256, 256)?;
+                            session.advance(
+                                &mut target,
+                                &mut head,
+                                anchor,
+                                context + 256,
+                                256,
+                                |_| false,
+                            )?;
                         } else {
                             with_policy(
                                 Policy {
@@ -371,6 +405,7 @@ fn real_adaptive_depth_screen() -> Result<()> {
                                         anchor,
                                         context + 256,
                                         256,
+                                        |_| false,
                                     )
                                 },
                             )?;
@@ -403,7 +438,11 @@ fn real_adaptive_depth_screen() -> Result<()> {
                     Policy {
                         thresholds: [f32::NEG_INFINITY; 2],
                     },
-                    || session.advance(&mut target, &mut head, anchor, context + 256, 256),
+                    || {
+                        session.advance(&mut target, &mut head, anchor, context + 256, 256, |_| {
+                            false
+                        })
+                    },
                 )?;
                 let mut delivered = vec![first];
                 delivered.extend(session.pending.drain(..));

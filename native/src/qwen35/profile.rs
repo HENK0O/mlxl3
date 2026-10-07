@@ -380,6 +380,7 @@ fn real_mtp_round_breakdown() -> Result<()> {
                             anchor,
                             context + 512,
                             256,
+                            |_| false,
                         )?;
                     }
                     let mut reference: Option<RoundReference> = None;
@@ -406,6 +407,7 @@ fn real_mtp_round_breakdown() -> Result<()> {
                                 anchor,
                                 context + 512,
                                 256,
+                                |_| false,
                             )?;
                             synchronize()?;
                             let seconds = start.elapsed().as_secs_f64();
@@ -452,6 +454,7 @@ fn real_mtp_round_breakdown() -> Result<()> {
                                     *delivered.last().unwrap(),
                                     context + 512,
                                     256,
+                                    |_| false,
                                 )?);
                             }
                             let state = model.snapshot()?;
